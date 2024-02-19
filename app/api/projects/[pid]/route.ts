@@ -6,14 +6,6 @@ const prisma = new PrismaClient()
 export async function GET(request: Request, context: any) {
     const { params } = context;
     return NextResponse.json({
-        id: params.tid
+        id: params.pid
     })
-}
-
-export async function PATCH(request: Request, context: any) {
-
-}
-
-export async function POST(request: Request, context: any) {
-    
 }
