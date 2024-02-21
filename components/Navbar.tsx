@@ -4,7 +4,7 @@ import { ModeToggle } from './ui/mode-toggle'
 
 const Navbar = () => {
   return (
-    <nav className='py-3 flex justify-center border-b-2 border-border/90'>
+    <nav className='py-3 flex justify-center border-b-2 border-border/90 bg-background'>
         <div className='flex w-10/12 justify-between'>
             <div className='flex items-center gap-2'>
                 <LinkNone2Icon />
