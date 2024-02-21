@@ -18,12 +18,13 @@ model Project {
 }
 
 model Ticket {
-  ticketId String @id @default(auto()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   author String
   title String
   description String?
   status Status @default(OPEN)
-  project Project @relation(fields: [ticketId], references: [id])
+  project Project @relation(fields: [projectId], references: [id])
+  projectId String @db.ObjectId
 }
 
 enum Status {
