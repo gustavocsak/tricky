@@ -1,11 +1,11 @@
-import { PrismaClient } from "@prisma/client";
-import { NextResponse } from "next/server";
-
-const prisma = new PrismaClient()
+import prisma from "../../db";
 
 export async function GET(request: Request, context: any) {
     const { params } = context;
-    return NextResponse.json({
-        id: params.pid
+    const project = prisma.project.findUnique({
+        where: {
+            id: params.pid
+        }
     })
+    return Response.json(project)
 }
