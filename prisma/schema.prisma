@@ -14,6 +14,7 @@ model Project {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   title String
   author String
+  createdAt DateTime @updatedAt
   tickets Ticket[]
 }
 
@@ -23,6 +24,7 @@ model Ticket {
   title String
   description String?
   status Status @default(OPEN)
+  createdAt DateTime @updatedAt
   project Project @relation(fields: [projectId], references: [id])
   projectId String @db.ObjectId
 }
