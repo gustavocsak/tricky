@@ -14,7 +14,7 @@ const ProjectView = () => {
 				<>
 					<section className='flex justify-between items-center py-2'>
 						<h2>{currentProject.title}</h2>
-						<Button>Add new ticket</Button>
+						<Button>New ticket</Button>
 					</section>
 					
 					<TicketTable tickets={currentProject?.tickets}/>
