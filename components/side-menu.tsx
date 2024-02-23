@@ -16,9 +16,8 @@ interface Project {
 }
 
 const SideMenu = () => {
-    const [projects, setProjects] = useState<Project[]>([])
     const [loading, setLoading] = useState(true)
-    const { currentProject, setProject } = useProjectContext();
+    const { currentProject, setProject, projects, setProjects } = useProjectContext();
     const [showProjectForm, setShowProjectForm] = useState(false)
     const [error, setError] = useState(null)
     const [navHeight, setNavHeight] = useState(0)
@@ -39,13 +38,13 @@ const SideMenu = () => {
     }
 
     const handleProjectSubmit = async (result: any) => {
-        setProject(result)
         await fetchProjects()
+        setProject(result)
     }
 
     useEffect(() => {
         fetchProjects()
-    }, [])
+    })
 
     useEffect(() => {
         const navElement = document.querySelector('.your-navigation-bar-class') as HTMLElement | null;
