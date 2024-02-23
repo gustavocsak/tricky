@@ -1,6 +1,7 @@
 "use client"
 
 import React, { createContext, useContext, useState } from 'react'
+import { set } from 'zod';
 
 type ProjectContextProviderProps = {
   children: React.ReactNode
@@ -16,16 +17,19 @@ type Project = {
 
 type ProjectContext = {
   currentProject: Project | null;
-  setProject: (project: Project) => void;
+  projects: Project[];
+  setProject: (project: Project | null) => void;
+  setProjects: (projects: Project[]) => void;
 }
 
 export const ProjectContext = createContext<ProjectContext | null>(null)
 
 export default function ProjectContextProvider({ children }: ProjectContextProviderProps) {
   const [currentProject, setProject] = useState<Project | null>(null)
+  const [projects, setProjects] = useState<Project[]>([])
 
   return (
-    <ProjectContext.Provider value={{ currentProject, setProject }}>
+    <ProjectContext.Provider value={{ currentProject, projects, setProject, setProjects }}>
       {children}
     </ProjectContext.Provider>
   )
