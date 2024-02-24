@@ -35,9 +35,10 @@ const TicketTable: React.FC<TicketTableProps> = ({ tickets }) => {
                         <TableHead className="w-[15px] font-medium"></TableHead>
                     </TableRow>
                 </TableHeader>
-                <TableBody>
+                
                     {tickets ? (
-                        tickets.map((ticket) => (
+                        <TableBody>
+                        {tickets.map((ticket) => (
                             <TableRow key={ticket.id}>
                                 <TableCell>{ticket.title}</TableCell>
                                 <TableCell>{ticket.author}</TableCell>
@@ -53,9 +54,10 @@ const TicketTable: React.FC<TicketTableProps> = ({ tickets }) => {
                                     </Button>
                                 </TableCell>
                             </TableRow>
-                        ))
+                        ))}
+                        </TableBody>
                     ) : null}
-                </TableBody>
+                
             </Table>
         </div>
     )
