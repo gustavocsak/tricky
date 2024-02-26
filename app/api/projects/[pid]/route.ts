@@ -28,3 +28,21 @@ export async function DELETE(request: Request, context: any) {
 
     return Response.json(deleteProject)
 }
+
+export async function PATCH(request: Request, context: any) {
+    const { params } = context;
+    const body = await request.json();
+
+    const updatedProject = await prisma.project.update({
+        where: {
+            id: params.pid
+        },
+        data: {
+            ...body
+        }
+    })
+
+    console.log(updatedProject)
+
+    return Response.json(updatedProject)
+}

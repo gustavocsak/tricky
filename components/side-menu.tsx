@@ -17,6 +17,7 @@ export default async function SideMenu() {
             <ProjectList data={data}/>
             <div className='flex flex-col gap-4'>
                 <ShowProjectForm />
+
             </div>
         </div>
     )

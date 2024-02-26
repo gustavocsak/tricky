@@ -14,11 +14,6 @@ import { useProjectContext } from '@/context/project-context'
 import { Button } from "@/components/ui/button"
 
 const ProjectEdit = () => {
-	const { currentProject, setProject } = useProjectContext();
-	const handleEdit = () => {
-		// handle edit logic
-	
-	}
 
 	return (
 		<Drawer>
@@ -30,15 +25,13 @@ const ProjectEdit = () => {
 					<DrawerTitle>Here you can edit your project details</DrawerTitle>
 					<DrawerDescription>Change the project title and author</DrawerDescription>
 				</DrawerHeader>
-				<div className='md:w-1/4'>
-					<ProjectForm handleProjectSubmit={handleEdit} project={currentProject} />
-				</div>
-				{/* <DrawerFooter>
-					<Button>Submit</Button>
-					<DrawerClose>
-						<Button variant="outline">Cancel</Button>
+				<div className='lg:w-1/4'>
+					<ProjectForm method="PATCH" />
+					<DrawerClose className='mt-2 w-full'>
+						<Button variant="outline" className='w-full'>Close</Button>
 					</DrawerClose>
-				</DrawerFooter> */}
+				</div>
+				
 			</DrawerContent>
 		</Drawer>
 	)

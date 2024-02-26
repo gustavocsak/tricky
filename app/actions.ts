@@ -22,3 +22,26 @@ export async function createProject(project: Project) {
         return { success: false, error: result.error.format() }
     }
 }
+
+export async function editProject(project: Project, id: string | undefined) {
+    if(!id) {
+        return { success: false, error: 'No id provided' }
+    }
+    const result = ProjectFormSchema.safeParse(project)
+
+    if(result.success) {
+        const response = await fetch(
+            `http://localhost:3000/api/projects/${id}`,
+            {
+                method: 'PATCH',
+                body: JSON.stringify(result.data)
+            }
+        )
+        revalidateTag('get-projects')
+        return response.json()
+    }
+
+    if(result.error) {
+        return { success: false, error: result.error.format() }
+    }
+}
