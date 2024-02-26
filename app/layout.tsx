@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" style={{ height: "100%"}}>
-      <body className={`${inter.className} h-full flex flex-col bg-background`}>
+      <body className={`${inter.className} h-full bg-background`}>
         <ThemeProvider>
           <Navbar />
           {children}

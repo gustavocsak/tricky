@@ -20,7 +20,6 @@ const SideMenu = () => {
     const { currentProject, setProject, projects, setProjects } = useProjectContext();
     const [showProjectForm, setShowProjectForm] = useState(false)
     const [error, setError] = useState(null)
-    const [navHeight, setNavHeight] = useState(0)
 
     const fetchProjects = async () => {
         try {
@@ -45,14 +44,6 @@ const SideMenu = () => {
     useEffect(() => {
         fetchProjects()
     })
-
-    useEffect(() => {
-        const navElement = document.querySelector('.your-navigation-bar-class') as HTMLElement | null;
-        if (navElement) {
-            const height = navElement.offsetHeight;
-            setNavHeight(height);
-        }
-    }, [])
 
     return (
         <div className='p-4 w-72 border-r-2 border-border/90 flex gap-8 flex-col justify-between overflow-auto'
@@ -92,7 +83,7 @@ const SideMenu = () => {
                 </div>
                 {showProjectForm && 
                     <div>
-                        <ProjectForm handleProjectSubmit={handleProjectSubmit}/>
+                        <ProjectForm handleProjectSubmit={handleProjectSubmit} project={null}/>
                     </div>
                 }
 

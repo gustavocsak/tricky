@@ -24,9 +24,18 @@ const ProjectFormSchema = z.object({
 
 interface ProjectFormProps {
     handleProjectSubmit: (result: any) => void;
+    project: Project | null;
 }
 
-const ProjectForm: React.FC<ProjectFormProps> = ({ handleProjectSubmit }) => {
+interface Project {
+    id: string,
+    title: string,
+    author: string,
+    tickets: [],
+    createdAt: string
+}
+
+const ProjectForm: React.FC<ProjectFormProps> = ({ handleProjectSubmit, project }) => {
     const { toast } = useToast()
 
     const form = useForm<z.infer<typeof ProjectFormSchema>>({
@@ -64,7 +73,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ handleProjectSubmit }) => {
                         <FormItem>
                             <FormLabel>Project Title</FormLabel>
                             <FormControl>
-                                <Input placeholder="My design project" {...field} />
+                                <Input placeholder="My design project" {...field} value={project?.title} />
                             </FormControl>
                             <FormDescription>
                                 This is the project title that will be shown in the menu above.
@@ -80,7 +89,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ handleProjectSubmit }) => {
                         <FormItem>
                             <FormLabel>Project Author</FormLabel>
                             <FormControl>
-                                <Input placeholder="Gustavo" {...field} />
+                                <Input placeholder="Gustavo" {...field} value={project?.author} />
                             </FormControl>
                             <FormDescription>
                                 This is your name!
