@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form"
 import { useToast } from "@/components/ui/use-toast"
 import { Input } from "@/components/ui/input"
+import { createProject } from '@/app/actions'
 
 const ProjectFormSchema = z.object({
     title: z.string().max(30, 'Project title must be less than 30 characters'),
@@ -23,7 +24,7 @@ const ProjectFormSchema = z.object({
 })
 
 interface ProjectFormProps {
-    handleProjectSubmit: (result: any) => void;
+    // handleProjectSubmit: (result: any) => void;
     project: Project | null;
 }
 
@@ -35,7 +36,7 @@ interface Project {
     createdAt: string
 }
 
-const ProjectForm: React.FC<ProjectFormProps> = ({ handleProjectSubmit, project }) => {
+const ProjectForm: React.FC<ProjectFormProps> = ({ project }) => {
     const { toast } = useToast()
 
     const form = useForm<z.infer<typeof ProjectFormSchema>>({
@@ -46,8 +47,22 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ handleProjectSubmit, project 
         }
     })
 
-    function onSubmit(values: z.infer<typeof ProjectFormSchema>) {
-        async function postProject() {
+    async function onSubmit(values: z.infer<typeof ProjectFormSchema>) {
+        const result = await createProject(values);
+        if(!result) {
+            console.log('error')
+            return
+        }
+
+        if(result.error) {
+            console.error(result.error)
+            return
+        }
+
+        toast({
+            description: 'Project created!',
+        })
+        /*async function postProject() {
             const response = await fetch('/api/projects', {
                 method: 'POST',
                 body: JSON.stringify(values)
@@ -56,11 +71,10 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ handleProjectSubmit, project 
         }
         postProject()
             .then((response) => {
-                handleProjectSubmit(response)
                 toast({
                     description: 'Project created!',
                 })
-            })
+            })*/
     }
 
     return (
