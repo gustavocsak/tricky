@@ -3,7 +3,6 @@ import React from 'react'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -16,6 +15,8 @@ import {
 } from "@/components/ui/form"
 import { useToast } from "@/components/ui/use-toast"
 import { Input } from "@/components/ui/input"
+import { createProject, editProject } from '@/app/actions'
+import { useProjectContext } from '@/context/project-context'
 
 const ProjectFormSchema = z.object({
     title: z.string().max(30, 'Project title must be less than 30 characters'),
@@ -23,35 +24,72 @@ const ProjectFormSchema = z.object({
 })
 
 interface ProjectFormProps {
-    handleProjectSubmit: (result: any) => void;
+    method: 'PATCH' | 'PUT' | 'POST';
 }
 
-const ProjectForm: React.FC<ProjectFormProps> = ({ handleProjectSubmit }) => {
+interface Project {
+    id: string,
+    title: string,
+    author: string,
+    tickets: [],
+    createdAt: string
+}
+
+const ProjectForm: React.FC<ProjectFormProps> = ({ method }) => {
     const { toast } = useToast()
+    const { currentProject, setProject } = useProjectContext()
 
     const form = useForm<z.infer<typeof ProjectFormSchema>>({
         resolver: zodResolver(ProjectFormSchema),
         defaultValues: {
-            title: '',
-            author: ''
+            title: method === "PATCH" ? currentProject?.title : '',
+            author: method === "PATCH" ? currentProject?.author : '',
         }
     })
 
-    function onSubmit(values: z.infer<typeof ProjectFormSchema>) {
-        async function postProject() {
-            const response = await fetch('/api/projects', {
-                method: 'POST',
-                body: JSON.stringify(values)
+    async function onSubmit(values: z.infer<typeof ProjectFormSchema>) {
+        //TODO: handle errors
+        console.log(method)
+        if(method === 'PATCH') {
+            const result = await editProject(values, currentProject?.id);
+            
+            if(!result) {
+                console.log('error')
+                return
+            }
+
+            if(result.error) {
+                console.error(result.error)
+                return
+            }
+            setProject(result)
+            toast({
+                description: 'Project updated successfully!',
             })
-            return response.json()
+            return
         }
-        postProject()
-            .then((response) => {
-                handleProjectSubmit(response)
-                toast({
-                    description: 'Project created!',
-                })
+
+        if(method === 'POST') {
+            const result = await createProject(values);
+            // let result = ''
+            if(!result) {
+                console.log('error')
+                return
+            }
+    
+            if(result.error) {
+                console.error(result.error)
+                return
+            }
+            
+            setProject(result)
+            toast({
+                description: 'Project created!',
             })
+
+        }
+        
+        
     }
 
     return (
@@ -64,7 +102,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ handleProjectSubmit }) => {
                         <FormItem>
                             <FormLabel>Project Title</FormLabel>
                             <FormControl>
-                                <Input placeholder="My design project" {...field} />
+                                <Input placeholder="My design project" {...field}  />
                             </FormControl>
                             <FormDescription>
                                 This is the project title that will be shown in the menu above.
@@ -80,7 +118,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ handleProjectSubmit }) => {
                         <FormItem>
                             <FormLabel>Project Author</FormLabel>
                             <FormControl>
-                                <Input placeholder="Gustavo" {...field} />
+                                <Input placeholder="Gustavo" {...field}  />
                             </FormControl>
                             <FormDescription>
                                 This is your name!

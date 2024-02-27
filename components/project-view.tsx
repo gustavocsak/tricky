@@ -1,16 +1,16 @@
 "use client"
 
-import React, { useState } from 'react'
 import TicketTable from './ticket-table'
 import { useProjectContext } from '../context/project-context';
 import { Button } from './ui/button';
-import { set } from 'zod';
 import ProjectDelete from './project-delete';
+import ProjectEdit from './project-edit';
 
 const ProjectView = () => {
-	const { currentProject, setProject } = useProjectContext();
+	const { currentProject } = useProjectContext();
 
 	return (
+		
 		<div className="p-4 w-full flex flex-col gap-4 justify-between">
 			{currentProject ? (
 				<>
@@ -26,22 +26,20 @@ const ProjectView = () => {
 					</article>
 					<article className='flex justify-between items-end'>
 						<section>
-							<h3>Project details</h3>
+							<h3 className='text-lg font-semibold'>Project details</h3>
 							<p>Author: {currentProject.author}</p>
 							<p>Created: {currentProject.createdAt.substring(0,10)}</p>
 						</section>
 						<div className='space-x-2'>
-							{/* <Button variant='destructive'>Delete Project</Button> */}
 							<ProjectDelete />
-							<Button variant='secondary'>Edit Project</Button>
+							<ProjectEdit />
 						</div>
 					</article>
 				</>
 			): (
+				// TODO: improve the no-project selected screen
 				<h2 className="p-4">Select a project</h2>
-			
 			)}
-			
 		</div>
 	)
 }

@@ -12,28 +12,33 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import { deleteProject } from '@/app/actions'
+import { useToast } from "@/components/ui/use-toast"
 
 const ProjectDelete = () => {
-    const { currentProject, setProject, projects, setProjects } = useProjectContext();
+    const { currentProject, setProject } = useProjectContext();
+    const { toast } = useToast()
 
     /**
      * Delete the current selected project
      * Makes a DELETE request to the api at /api/projects/:id
      */
     const handleDelete = async () => {
-        try {
-            const response = await fetch(`/api/projects/${currentProject?.id}`, {
-                method: 'DELETE'
-            })
-            if (!response.ok) {
-                throw new Error('Failed to delete project');
-            }
-            const newProjects = projects.filter(project => project.id !== currentProject?.id)
-            setProject(null)
-            setProjects(newProjects)
-        } catch (error) {
-            console.error(error)
+        const result = await deleteProject(currentProject?.id);
+        if(!result) {
+            console.log('error')
+            return
         }
+        if(result.error) {
+            console.error(result.error)
+            return
+        }
+        
+        setProject(null)
+        toast({
+            description: 'Project updated successfully!',
+        })
+        return
     }
 
     return (
