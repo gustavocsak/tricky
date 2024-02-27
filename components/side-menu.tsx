@@ -7,7 +7,6 @@ export default async function SideMenu() {
             tags: ['get-projects'],
         }
     })
-
     const data = await response.json()
 
     return (
@@ -17,7 +16,6 @@ export default async function SideMenu() {
             <ProjectList data={data}/>
             <div className='flex flex-col gap-4'>
                 <ShowProjectForm />
-
             </div>
         </div>
     )

@@ -3,7 +3,6 @@ import React from 'react'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -72,6 +71,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ method }) => {
 
         if(method === 'POST') {
             const result = await createProject(values);
+            // let result = ''
             if(!result) {
                 console.log('error')
                 return

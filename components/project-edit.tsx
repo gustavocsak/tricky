@@ -10,7 +10,6 @@ import {
 	DrawerTrigger,
 } from "@/components/ui/drawer"
 import ProjectForm from './project-form'
-import { useProjectContext } from '@/context/project-context'
 import { Button } from "@/components/ui/button"
 
 const ProjectEdit = () => {
@@ -31,7 +30,6 @@ const ProjectEdit = () => {
 						<Button variant="outline" className='w-full'>Close</Button>
 					</DrawerClose>
 				</div>
-				
 			</DrawerContent>
 		</Drawer>
 	)
