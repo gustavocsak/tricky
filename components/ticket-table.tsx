@@ -4,7 +4,6 @@ import {
 } from "@/components/ui/table";
 
 import { MagicWandIcon, Cross2Icon } from '@radix-ui/react-icons';
-import TicketInfo from './ticket-info';
 import { Button } from './ui/button';
 
 interface Ticket {

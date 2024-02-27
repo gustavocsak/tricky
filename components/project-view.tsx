@@ -7,9 +7,10 @@ import ProjectDelete from './project-delete';
 import ProjectEdit from './project-edit';
 
 const ProjectView = () => {
-	const { currentProject, setProject } = useProjectContext();
+	const { currentProject } = useProjectContext();
 
 	return (
+		
 		<div className="p-4 w-full flex flex-col gap-4 justify-between">
 			{currentProject ? (
 				<>
@@ -36,10 +37,9 @@ const ProjectView = () => {
 					</article>
 				</>
 			): (
+				// TODO: improve the no-project selected screen
 				<h2 className="p-4">Select a project</h2>
-			
 			)}
-			
 		</div>
 	)
 }
