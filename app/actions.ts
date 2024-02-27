@@ -45,3 +45,22 @@ export async function editProject(project: Project, id: string | undefined) {
         return { success: false, error: result.error.format() }
     }
 }
+
+export async function deleteProject(id: string | undefined) {
+
+    if(!id) {
+        return
+    }
+   
+    const response = await fetch(`http://localhost:3000/api/projects/${id}`, {
+        method: 'DELETE'
+    })
+
+    if (!response.ok) {
+        throw new Error('Failed to delete project');
+    }
+    
+    revalidateTag('get-projects')
+    return response.json()
+   
+}
