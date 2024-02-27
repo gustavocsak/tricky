@@ -16,6 +16,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  console.log('RootLayout render')
   return (
     <html lang="en" style={{ height: "100%"}}>
       <body className={`${inter.className} h-full bg-background`}>
