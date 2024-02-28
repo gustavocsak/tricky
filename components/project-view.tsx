@@ -1,10 +1,11 @@
 "use client"
-
+import React from 'react'
 import TicketTable from './ticket-table'
 import { useProjectContext } from '../context/project-context';
-import { Button } from './ui/button';
 import ProjectDelete from './project-delete';
 import ProjectEdit from './project-edit';
+import AddTicket from './add-ticket';
+
 
 const ProjectView = () => {
 	const { currentProject } = useProjectContext();
@@ -19,7 +20,7 @@ const ProjectView = () => {
 							<h2 className='text-2xl font-bold'>
 								{currentProject.title}
 							</h2>
-							<Button>New ticket</Button>
+							<AddTicket />
 						</section>
 						
 						<TicketTable tickets={currentProject?.tickets}/>

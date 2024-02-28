@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/form"
 import { useToast } from "@/components/ui/use-toast"
 import { Input } from "@/components/ui/input"
-import { createProject, editProject } from '@/app/actions'
+import { createProject, editProject} from '@/app/actions'
 import { useProjectContext } from '@/context/project-context'
 
 const ProjectFormSchema = z.object({
@@ -25,14 +25,6 @@ const ProjectFormSchema = z.object({
 
 interface ProjectFormProps {
     method: 'PATCH' | 'PUT' | 'POST';
-}
-
-interface Project {
-    id: string,
-    title: string,
-    author: string,
-    tickets: [],
-    createdAt: string
 }
 
 const ProjectForm: React.FC<ProjectFormProps> = ({ method }) => {
@@ -49,19 +41,17 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ method }) => {
 
     async function onSubmit(values: z.infer<typeof ProjectFormSchema>) {
         //TODO: handle errors
-        console.log(method)
         if(method === 'PATCH') {
             const result = await editProject(values, currentProject?.id);
-            
             if(!result) {
                 console.log('error')
                 return
             }
-
             if(result.error) {
                 console.error(result.error)
                 return
             }
+
             setProject(result)
             toast({
                 description: 'Project updated successfully!',
@@ -71,12 +61,10 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ method }) => {
 
         if(method === 'POST') {
             const result = await createProject(values);
-            // let result = ''
             if(!result) {
                 console.log('error')
                 return
             }
-    
             if(result.error) {
                 console.error(result.error)
                 return
@@ -86,10 +74,8 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ method }) => {
             toast({
                 description: 'Project created!',
             })
-
+            return
         }
-        
-        
     }
 
     return (
