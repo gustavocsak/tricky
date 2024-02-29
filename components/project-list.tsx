@@ -2,6 +2,7 @@
 import { Button } from '@/components/ui/button';
 import { useProjectContext } from '@/context/project-context';
 import { CommitIcon } from '@radix-ui/react-icons';
+import { getProject } from '@/app/actions'; 
 
 interface Project {
     id: string,
@@ -15,8 +16,17 @@ interface ProjectListProps {
     data: Project[];
 }
 
-const ProjectList: React.FC<ProjectListProps> = ({ data }) => {
+export default function ProjectList({ data }: ProjectListProps) {
     const { currentProject, setProject } = useProjectContext()
+
+    async function handleProjectClick(project: Project) {
+        
+        console.log(project);
+        const result = await getProject(project.id);
+        setProject(result);
+        
+    }
+
     return (
         <ul>
             {data.map((project) => {
@@ -35,5 +45,3 @@ const ProjectList: React.FC<ProjectListProps> = ({ data }) => {
         </ul>
     )
 }
-
-export default ProjectList

@@ -8,7 +8,7 @@ import { PlusIcon } from '@radix-ui/react-icons'
 export default function ShowProjectForm() {
     const [showForm, setShowForm] = useState(false)
     return (
-        <>
+        <div className='flex flex-col gap-4'>
             <Button 
                 className='w-full mr-auto'
                 onClick={() => setShowForm(!showForm)}
@@ -19,7 +19,7 @@ export default function ShowProjectForm() {
             {showForm && (
                 <ProjectForm method="POST" />
             )}
-        </>
+        </div>
         
     )
 }

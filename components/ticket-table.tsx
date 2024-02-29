@@ -21,7 +21,7 @@ interface TicketTableProps {
     tickets: Ticket[];
 }
 
-const TicketTable: React.FC<TicketTableProps> = ({ tickets }) => {
+export default function TicketTable({ tickets }: TicketTableProps) {
 
     return (
         <div className="rounded-md sm:border">
@@ -62,5 +62,3 @@ const TicketTable: React.FC<TicketTableProps> = ({ tickets }) => {
         </div>
     )
 }
-
-export default TicketTable

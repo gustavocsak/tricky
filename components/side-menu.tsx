@@ -14,9 +14,7 @@ export default async function SideMenu() {
              style={{ maxHeight: `calc(100vh - 62px)` }}  
         >
             <ProjectList data={data}/>
-            <div className='flex flex-col gap-4'>
-                <ShowProjectForm />
-            </div>
+            <ShowProjectForm />
         </div>
     )
 }

@@ -22,7 +22,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { DialogClose } from '@radix-ui/react-dialog'
+import { createTicket } from '@/app/actions'
 import { useToast } from "@/components/ui/use-toast"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -42,7 +42,7 @@ const TicketFormSchema = z.object({
 //     method: 'PATCH' | 'PUT' | 'POST';
 // }
 
-const ProjectForm = () => {
+export default function TicketForm() {
     const { toast } = useToast()
     const { currentProject, setProject } = useProjectContext()
 
@@ -56,24 +56,9 @@ const ProjectForm = () => {
 
     async function onSubmit(values: z.infer<typeof TicketFormSchema>) {
         //TODO: handle errors
-        /*if(method === 'PATCH') {
-            const result = await editProject(values, currentProject?.id);
-            if(!result) {
-                console.log('error')
-                return
-            }
-            if(result.error) {
-                console.error(result.error)
-                return
-            }
-
-            setProject(result)
-            toast({
-                description: 'Project updated successfully!',
-            })
-            return
-        }
-
+        console.log(values)
+        const result = await createTicket(values)
+        /*
         if(method === 'POST') {
             const result = await createProject(values);
             if(!result) {
@@ -173,13 +158,8 @@ const ProjectForm = () => {
                         </FormItem>
                     )}
                 />
-                
                 <Button type="submit" className='w-full'>Submit</Button>
-                
-                
             </form>
         </Form>
     )
 }
-
-export default ProjectForm

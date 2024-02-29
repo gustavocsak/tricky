@@ -7,7 +7,7 @@ import ProjectEdit from './project-edit';
 import AddTicket from './add-ticket';
 
 
-const ProjectView = () => {
+export default function ProjectView() {
 	const { currentProject } = useProjectContext();
 
 	return (
@@ -44,5 +44,3 @@ const ProjectView = () => {
 		</div>
 	)
 }
-
-export default ProjectView
