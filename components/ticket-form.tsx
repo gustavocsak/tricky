@@ -56,8 +56,16 @@ export default function TicketForm() {
 
     async function onSubmit(values: z.infer<typeof TicketFormSchema>) {
         //TODO: handle errors
-        console.log(values)
         const result = await createTicket(values)
+        if(!result) {
+            console.log('error')
+            return
+        }
+        if(result.error) {
+            console.error(result.error)
+            return
+        }
+
         /*
         if(method === 'POST') {
             const result = await createProject(values);

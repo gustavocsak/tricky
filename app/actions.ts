@@ -68,7 +68,6 @@ export async function deleteProject(id: string | undefined) {
 }
 
 export async function getProject(id: string) {
-    console.log('here')
     const response = await fetch(`http://localhost:3000/api/projects/${id}`)
     return response.json()
 }

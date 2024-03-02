@@ -17,15 +17,8 @@ interface ProjectListProps {
 }
 
 export default function ProjectList({ data }: ProjectListProps) {
-    const { currentProject, setProject } = useProjectContext()
-
-    async function handleProjectClick(project: Project) {
-        
-        console.log(project);
-        const result = await getProject(project.id);
-        setProject(result);
-        
-    }
+    const { currentProject, setProject, setProjects } = useProjectContext();
+    setProjects(data);
 
     return (
         <ul>

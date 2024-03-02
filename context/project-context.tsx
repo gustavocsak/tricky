@@ -16,16 +16,19 @@ type Project = {
 
 type ProjectContext = {
   currentProject: Project | null;
+  projects: Project[];
   setProject: (project: Project | null) => void;
+  setProjects: (projects: Project[]) => void;
 }
 
 export const ProjectContext = createContext<ProjectContext | null>(null)
 
 export default function ProjectContextProvider({ children }: ProjectContextProviderProps) {
   const [currentProject, setProject] = useState<Project | null>(null)
+  const [projects, setProjects] = useState<Project[]>([])
 
   return (
-    <ProjectContext.Provider value={{ currentProject, setProject }}>
+    <ProjectContext.Provider value={{ currentProject, setProject, projects, setProjects }}>
       {children}
     </ProjectContext.Provider>
   )

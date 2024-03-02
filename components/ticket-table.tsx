@@ -1,11 +1,12 @@
-// 'use server'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
 
-import { MagicWandIcon, Cross2Icon } from '@radix-ui/react-icons';
-import { Button } from './ui/button';
+import { useProjectContext } from '@/context/project-context';
+import { getProject } from '@/app/actions'
+import TicketRow from './ticket-row';
+import LoadingRow from './loading-row';
 
 interface Ticket {
     id: string;
@@ -22,6 +23,24 @@ interface TicketTableProps {
 }
 
 export default function TicketTable({ tickets }: TicketTableProps) {
+    const { currentProject } = useProjectContext();
+    const [loading, setLoading] = useState(false);
+    const [projectTickets, setProjectTickets] = useState<Ticket[]>([]);
+    
+    useEffect(() => {
+        async function getTickets() {
+            setLoading(true)
+            console.log('true')
+            if (currentProject) {
+                const response = await getProject(currentProject.id);
+                console.log(response)
+                setProjectTickets(response.tickets)
+            }
+            setLoading(false)
+        }
+    
+        getTickets();
+    }, [currentProject])
 
     return (
         <div className="rounded-md sm:border">
@@ -34,30 +53,16 @@ export default function TicketTable({ tickets }: TicketTableProps) {
                         <TableHead className="w-[15px] font-medium"></TableHead>
                         <TableHead className="w-[15px] font-medium"></TableHead>
                     </TableRow>
-                </TableHeader>
-                
-                    {tickets ? (
-                        <TableBody>
-                        {tickets.map((ticket) => (
-                            <TableRow key={ticket.id}>
-                                <TableCell>{ticket.title}</TableCell>
-                                <TableCell>{ticket.author}</TableCell>
-                                <TableCell>{ticket.status}</TableCell>
-                                <TableCell>
-                                    <Button variant="ghost">
-                                        <MagicWandIcon />
-                                    </Button>
-                                </TableCell>
-                                <TableCell>
-                                    <Button variant="ghost">
-                                        <Cross2Icon className='text-red-600' />
-                                    </Button>
-                                </TableCell>
-                            </TableRow>
+                </TableHeader>  
+                {loading ? (
+                    <LoadingRow />     
+                ) : 
+                    <TableBody>
+                        {projectTickets.map((ticket) => (
+                            <TicketRow key={ticket.id} ticket={ticket} />
                         ))}
-                        </TableBody>
-                    ) : null}
-                
+                    </TableBody>
+                }
             </Table>
         </div>
     )
