@@ -23,7 +23,7 @@ const ProjectDelete = () => {
      * Delete the current selected project
      * Makes a DELETE request to the api at /api/projects/:id
      */
-    const handleDelete = async () => {
+    async function handleDelete() {
         const result = await deleteProject(currentProject?.id);
         if(!result) {
             console.log('error')

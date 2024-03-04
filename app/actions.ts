@@ -2,9 +2,11 @@
 
 import { z } from 'zod'
 import ProjectFormSchema from './../lib/schemas/project';
+import TicketFormSchema from '@/lib/schemas/ticket';
 import { revalidateTag } from 'next/cache';
 
 type Project = z.infer<typeof ProjectFormSchema>
+type Ticket = z.infer<typeof TicketFormSchema>
 
 export async function createProject(project: Project) {
     const result = ProjectFormSchema.safeParse(project)
@@ -63,4 +65,17 @@ export async function deleteProject(id: string | undefined) {
     revalidateTag('get-projects')
     return response.json()
    
+}
+
+export async function getProject(id: string) {
+    const response = await fetch(`http://localhost:3000/api/projects/${id}`)
+    return response.json()
+}
+
+export async function createTicket(ticket: Ticket) {
+    const response = await fetch('http://localhost:3000/api/tickets', {
+        method: 'POST',
+        body: JSON.stringify(ticket)
+    })
+    return response.json()
 }
