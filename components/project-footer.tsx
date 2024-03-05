@@ -18,6 +18,6 @@ export default function ProjectFooter({ author, createdAt }: ProjectFooterProps)
                 <ProjectDelete />
                 <ProjectEdit />
             </div>
-</>
+        </>
     )
 }

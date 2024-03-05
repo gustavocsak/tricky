@@ -38,10 +38,6 @@ const TicketFormSchema = z.object({
     status: TicketStatusEnum
 })
 
-// interface ProjectFormProps {
-//     method: 'PATCH' | 'PUT' | 'POST';
-// }
-
 export default function TicketForm() {
     const { toast } = useToast()
     const { currentProject, setProject } = useProjectContext()
