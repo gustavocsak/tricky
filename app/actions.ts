@@ -72,6 +72,11 @@ export async function getProject(id: string) {
     return response.json()
 }
 
+export async function getProjects() {
+    const response = await fetch('http://localhost:3000/api/projects')
+    return response.json()
+}
+
 export async function createTicket(ticket: Ticket) {
     const response = await fetch('http://localhost:3000/api/tickets', {
         method: 'POST',

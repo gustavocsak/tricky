@@ -1,7 +1,8 @@
 'use client'
-import { Button } from '@/components/ui/button';
-import { useProjectContext } from '@/context/project-context';
-import { CommitIcon } from '@radix-ui/react-icons';
+import { useQuery } from '@tanstack/react-query';
+
+import { getProjects } from '@/app/actions';
+import ProjectCard from './project-card';
 
 interface Project {
     id: string,
@@ -11,27 +12,17 @@ interface Project {
     createdAt: string
 }
 
-interface ProjectListProps {
-    data: Project[];
-}
 
-export default function ProjectList({ data }: ProjectListProps) {
-    const { currentProject, setProject, setProjects } = useProjectContext();
-    setProjects(data);
+export default function ProjectList(/*{ data }: ProjectListProps*/) {
+    
+    const { data } = useQuery({ queryKey: ['projects'], queryFn: getProjects })
+   
 
     return (
         <ul>
-            {data.map((project) => {
+            {data?.map((project: Project) => {
                 return (
-                    <li key={project.id}>
-                        <Button variant={currentProject?.id === project.id ? 'default' : 'ghost'}
-                            className='w-full flex gap-4 justify-start items-center'
-                            onClick={() => setProject(project)}
-                        >
-                            <CommitIcon />
-                            {project.title}
-                        </Button>
-                    </li>
+                    <ProjectCard project={project} key={project.id} />
                 )
             })}
         </ul>
