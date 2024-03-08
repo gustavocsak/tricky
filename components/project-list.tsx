@@ -1,8 +1,8 @@
 'use client'
-import { useQuery } from '@tanstack/react-query';
-
-import { getProjects } from '@/app/actions';
+import { useEffect } from 'react';
 import ProjectCard from './project-card';
+import { useProjectContext } from '@/context/project-context';
+
 
 interface Project {
     id: string,
@@ -12,15 +12,24 @@ interface Project {
     createdAt: string
 }
 
+interface ProjectListProps {
+    data: Project[];
+}
 
-export default function ProjectList(/*{ data }: ProjectListProps*/) {
+
+export default function ProjectList({ data }: ProjectListProps) {
     
-    const { data } = useQuery({ queryKey: ['projects'], queryFn: getProjects })
+    const { currentProject, setProject, setProjects } = useProjectContext();
+    useEffect(() => {
+        function setInitialProjects() {
+            setProjects(data);
+        }
+        setInitialProjects();
+    }, [data, setProjects])
    
-
     return (
         <ul>
-            {data?.map((project: Project) => {
+            {data.map((project: Project) => {
                 return (
                     <ProjectCard project={project} key={project.id} />
                 )
