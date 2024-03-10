@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 import Navbar from "@/components/navbar";
-import Providers from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,10 +21,8 @@ export default function RootLayout({
     <html lang="en" style={{ height: "100%" }}>
       <body className={`${inter.className} h-full bg-background`}>
         <ThemeProvider>
-          <Providers>
             <Navbar />
             {children}
-          </Providers>
         </ThemeProvider>
       </body>
     </html>
