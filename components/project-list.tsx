@@ -19,13 +19,10 @@ interface ProjectListProps {
 
 export default function ProjectList({ data }: ProjectListProps) {
     
-    const { currentProject, setProject, setProjects } = useProjectContext();
-    useEffect(() => {
-        function setInitialProjects() {
-            setProjects(data);
-        }
-        setInitialProjects();
-    }, [data, setProjects])
+    const { setProjects } = useProjectContext();
+
+    /* To be used in project-view */
+    setProjects(data);
    
     return (
         <ul>
