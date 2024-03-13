@@ -3,6 +3,9 @@ import ProjectList from './project-list'
 
 export default async function SideMenu() {
     
+    /**
+     * Fetch projects using server actions
+     */
     const response = await fetch('http://localhost:3000/api/projects', {
         next: {
             tags: ['get-projects'],

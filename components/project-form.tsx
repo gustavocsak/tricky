@@ -29,7 +29,7 @@ interface ProjectFormProps {
 
 const ProjectForm: React.FC<ProjectFormProps> = ({ method }) => {
     const { toast } = useToast()
-    const { currentProject, setProject } = useProjectContext()
+    const { currentProject, setCurrentProject } = useProjectContext()
 
     const form = useForm<z.infer<typeof ProjectFormSchema>>({
         resolver: zodResolver(ProjectFormSchema),
@@ -52,7 +52,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ method }) => {
                 return
             }
 
-            setProject(result)
+            setCurrentProject(result)
             toast({
                 description: 'Project updated successfully!',
             })
@@ -70,7 +70,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ method }) => {
                 return
             }
             
-            setProject(result)
+            setCurrentProject(result)
             toast({
                 description: 'Project created!',
             })
