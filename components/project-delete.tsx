@@ -16,7 +16,7 @@ import { deleteProject } from '@/app/actions'
 import { useToast } from "@/components/ui/use-toast"
 
 const ProjectDelete = () => {
-    const { currentProject, setProject } = useProjectContext();
+    const { currentProject, setCurrentProject } = useProjectContext();
     const { toast } = useToast()
 
     /**
@@ -34,7 +34,7 @@ const ProjectDelete = () => {
             return
         }
         
-        setProject(null)
+        setCurrentProject(null)
         toast({
             description: 'Project updated successfully!',
         })

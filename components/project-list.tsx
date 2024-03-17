@@ -1,8 +1,6 @@
 'use client'
-import { useEffect } from 'react';
 import ProjectCard from './project-card';
 import { useProjectContext } from '@/context/project-context';
-
 
 interface Project {
     id: string,
