@@ -1,14 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useProjectContext } from "@/context/project-context";
 import { CommitIcon } from '@radix-ui/react-icons';
-
-interface Project {
-    id: string,
-    title: string,
-    author: string,
-    tickets: [],
-    createdAt: string
-}
+import { Project } from "@/lib/types";
 
 interface ProjectCardProps {
     project: Project;

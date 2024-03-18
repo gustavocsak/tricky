@@ -1,5 +1,5 @@
 import {
-    Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
+    TableBody, TableCell, TableRow,
 } from "@/components/ui/table";
 import { Skeleton } from '@/components/ui/skeleton';
 
