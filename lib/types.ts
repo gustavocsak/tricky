@@ -5,3 +5,13 @@ export interface Project {
     tickets: [],
     createdAt: string
 }
+
+export interface Ticket {
+    id: string;
+    author: string;
+    title: string;
+    description: string;
+    status: string;
+    createdAt: string;
+    projectId: string;
+}

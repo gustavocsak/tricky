@@ -1,15 +1,6 @@
 import React from 'react'
 import { TableCell, TableRow } from "@/components/ui/table";
-
-interface Ticket {
-    id: string;
-    author: string;
-    title: string;
-    description: string;
-    status: string;
-    createdAt: string;
-    projectId: string;
-}
+import { Ticket } from '@/lib/types'
 
 interface TicketTableProps {
     ticket: Ticket;
