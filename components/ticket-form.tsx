@@ -40,7 +40,7 @@ const TicketFormSchema = z.object({
 
 export default function TicketForm() {
     const { toast } = useToast()
-    const { currentProject, setProject } = useProjectContext()
+    const { currentProject, setCurrentProject } = useProjectContext()
 
     const form = useForm<z.infer<typeof TicketFormSchema>>({
         resolver: zodResolver(TicketFormSchema),

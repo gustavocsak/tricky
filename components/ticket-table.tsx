@@ -1,22 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import {
-    Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
+    Table, TableBody, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
 
 import { useProjectContext } from '@/context/project-context';
 import { getProject } from '@/app/actions'
 import TicketRow from './ticket-row';
 import LoadingRow from './loading-row';
-
-interface Ticket {
-    id: string;
-    author: string;
-    title: string;
-    description: string;
-    status: string;
-    createdAt: string;
-    projectId: string;
-}
+import { Ticket } from '@/lib/types';
 
 interface TicketTableProps {
     tickets: Ticket[];
