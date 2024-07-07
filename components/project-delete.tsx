@@ -34,10 +34,12 @@ const ProjectDelete = () => {
             return
         }
         
-        setCurrentProject(null)
         toast({
-            description: 'Project updated successfully!',
+            description: `Project ${currentProject?.title} deleted successfully.`,
         })
+
+        setCurrentProject(null)
+        
         return
     }
 

@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {
     Table, TableBody, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
 
-import { useProjectContext } from '@/context/project-context';
-import { getProject } from '@/app/actions'
 import TicketRow from './ticket-row';
 import LoadingRow from './loading-row';
 import { Ticket } from '@/lib/types';
@@ -14,25 +12,7 @@ interface TicketTableProps {
 }
 
 export default function TicketTable({ tickets }: TicketTableProps) {
-    const { currentProject } = useProjectContext();
-    const [loading, setLoading] = useState(false);
-    const [projectTickets, setProjectTickets] = useState<Ticket[]>([]);
-    
-    useEffect(() => {
-        async function getTickets() {
-            setLoading(true)
-            console.log('true')
-            if (currentProject) {
-                const response = await getProject(currentProject.id);
-                console.log(response)
-                setProjectTickets(response.tickets)
-            }
-            setLoading(false)
-        }
-    
-        getTickets();
-    }, [currentProject])
-
+   
     return (
         <div className="rounded-md sm:border">
             <Table>
@@ -44,16 +24,12 @@ export default function TicketTable({ tickets }: TicketTableProps) {
                         <TableHead className="w-[15px] font-medium"></TableHead>
                         <TableHead className="w-[15px] font-medium"></TableHead>
                     </TableRow>
-                </TableHeader>  
-                {loading ? (
-                    <LoadingRow />     
-                ) : 
+                </TableHeader>   
                     <TableBody>
-                        {projectTickets.map((ticket) => (
+                        {tickets.map((ticket) => (
                             <TicketRow key={ticket.id} ticket={ticket} />
                         ))}
-                    </TableBody>
-                }
+                    </TableBody>    
             </Table>
         </div>
     )
