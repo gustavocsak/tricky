@@ -19,8 +19,8 @@ import { createProject, editProject} from '@/app/actions'
 import { useProjectContext } from '@/context/project-context'
 
 const ProjectFormSchema = z.object({
-    title: z.string().max(30, 'Project title must be less than 30 characters.').min(1, 'test'),
-    author: z.string().max(30, 'Author name must be less than 30 characters.'),
+    title: z.string().max(30, 'Project title must be less than 30 characters').min(1, 'Project title must not be empty'),
+    author: z.string().max(30, 'Author name must be less than 30 characters').min(1, 'Author name must not be empty'),
 
 })
 
@@ -56,7 +56,6 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ method }) => {
                 console.error(result.error)
                 return
             }
-            console.log(result)
             
             setCurrentProject({...result, tickets: currentProject?.tickets})
             toast({

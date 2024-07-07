@@ -32,8 +32,8 @@ import { useProjectContext } from '@/context/project-context'
 const TicketStatusEnum = z.enum(['open', 'progress', 'done']);
 
 const TicketFormSchema = z.object({
-    title: z.string().max(30, 'Ticket title must be less than 30 characters'),
-    author: z.string().max(30, 'Author name must be less than 30 characters'),
+    title: z.string().max(30, 'Ticket title must be less than 30 characters').min(1, 'Ticket title must not be empty'),
+    author: z.string().max(30, 'Author name must be less than 30 characters').min(1, 'Author name must not be empty'),
     description: z.string().max(100, 'Description must be less than 100 characters').optional(),
     status: TicketStatusEnum
 })
