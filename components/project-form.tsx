@@ -19,8 +19,9 @@ import { createProject, editProject} from '@/app/actions'
 import { useProjectContext } from '@/context/project-context'
 
 const ProjectFormSchema = z.object({
-    title: z.string().max(30, 'Project title must be less than 30 characters'),
-    author: z.string().max(30, 'Author name must be less than 30 characters'),
+    title: z.string().max(30, 'Project title must be less than 30 characters.').min(1, 'test'),
+    author: z.string().max(30, 'Author name must be less than 30 characters.'),
+
 })
 
 interface ProjectFormProps {
@@ -42,17 +43,22 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ method }) => {
     async function onSubmit(values: z.infer<typeof ProjectFormSchema>) {
         //TODO: handle errors
         if(method === 'PATCH') {
+            if(!values.author) {
+
+            }
             const result = await editProject(values, currentProject?.id);
             if(!result) {
                 console.log('error')
                 return
             }
+            
             if(result.error) {
                 console.error(result.error)
                 return
             }
-
-            setCurrentProject(result)
+            console.log(result)
+            
+            setCurrentProject({...result, tickets: currentProject?.tickets})
             toast({
                 description: 'Project updated successfully!',
             })

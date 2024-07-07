@@ -30,7 +30,7 @@ export async function editProject(project: Project, id: string | undefined) {
         return { success: false, error: 'No id provided' }
     }
     const result = ProjectFormSchema.safeParse(project)
-
+    // console.log(project)
     if(result.success) {
         const response = await fetch(
             `http://localhost:3000/api/projects/${id}`,

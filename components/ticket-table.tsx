@@ -12,7 +12,7 @@ interface TicketTableProps {
 }
 
 export default function TicketTable({ tickets }: TicketTableProps) {
-   
+    
     return (
         <div className="rounded-md sm:border">
             <Table>
@@ -26,7 +26,7 @@ export default function TicketTable({ tickets }: TicketTableProps) {
                     </TableRow>
                 </TableHeader>   
                     <TableBody>
-                        {tickets.map((ticket) => (
+                        {tickets?.map((ticket) => (
                             <TicketRow key={ticket.id} ticket={ticket} />
                         ))}
                     </TableBody>    

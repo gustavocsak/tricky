@@ -47,7 +47,6 @@ export async function PATCH(request: Request, context: any) {
         }
     })
 
-    console.log(updatedProject)
 
     return Response.json(updatedProject)
 }

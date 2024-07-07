@@ -7,6 +7,7 @@ import ProjectFooter from './project-footer';
 
 export default function ProjectView() {
 	const { currentProject } = useProjectContext();
+	
 
 	return (
 		
