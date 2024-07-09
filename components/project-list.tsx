@@ -11,6 +11,7 @@ export default function ProjectList({ data }: ProjectListProps) {
 
     /* To be used in project-view */
     setProjects(data);
+
     return (
         <ul>
             {data.map((project: Project) => {

@@ -12,6 +12,7 @@ export default async function SideMenu() {
         }
     })
     const data = await response.json()
+    
 
     return (
         <div className='p-4 w-72 border-r-2 border-border/90 flex gap-8 flex-col justify-between overflow-auto'

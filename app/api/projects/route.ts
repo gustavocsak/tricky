@@ -6,6 +6,7 @@ export async function GET() {
             tickets: true
         }
     })
+    console.log(allProjects)
     return Response.json(allProjects)
 }
 

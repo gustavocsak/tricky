@@ -29,7 +29,7 @@ import { Textarea } from "@/components/ui/textarea"
 
 import { useProjectContext } from '@/context/project-context'
 
-const TicketStatusEnum = z.enum(['open', 'progress', 'done']);
+const TicketStatusEnum = z.enum(['OPEN', 'PROGRESS', 'DONE']);
 
 const TicketFormSchema = z.object({
     title: z.string().max(30, 'Ticket title must be less than 30 characters').min(1, 'Ticket title must not be empty'),
@@ -52,8 +52,9 @@ export default function TicketForm() {
 
     async function onSubmit(values: z.infer<typeof TicketFormSchema>) {
         //TODO: handle errors
-        console.log('submit')
-        const result = await createTicket(values)
+        
+        const result = await createTicket(values, currentProject?.id)
+        // console.log(result)
         if(!result) {
             console.log('error')
             return
@@ -62,6 +63,9 @@ export default function TicketForm() {
             console.error(result.error)
             return
         }
+
+
+
 
 
         /*
@@ -152,9 +156,9 @@ export default function TicketForm() {
                                     </SelectTrigger>
                                 </FormControl>
                                 <SelectContent>
-                                    <SelectItem value="open">Open</SelectItem>
-                                    <SelectItem value="progress">In progress</SelectItem>
-                                    <SelectItem value="closed">Closed</SelectItem>
+                                    <SelectItem value="OPEN">Open</SelectItem>
+                                    <SelectItem value="PROGRESS">In progress</SelectItem>
+                                    <SelectItem value="CLOSED">Closed</SelectItem>
                                 </SelectContent>
                             </Select>
                             <FormDescription>

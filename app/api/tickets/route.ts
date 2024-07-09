@@ -1,7 +1,11 @@
+import { NextResponse } from "next/server";
 import prisma from "../db";
+import { revalidateTag } from "next/cache";
 
 export async function POST(request: Request) {
-    const body = await request.json();
+    
+    const body = await request.json();    
+
     try {
         const newTicket = await prisma.ticket.create({
             data: {
@@ -14,6 +18,7 @@ export async function POST(request: Request) {
                 }
             }
         })
+        revalidateTag('get-projects')
         return Response.json(newTicket)
     } catch(e) {
         return Response.json(

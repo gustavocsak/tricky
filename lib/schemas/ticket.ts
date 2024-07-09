@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-const TicketStatusEnum = z.enum(['open', 'progress', 'done']);
+const TicketStatusEnum = z.enum(['OPEN', 'PROGRESS', 'DONE']);
 
 const TicketFormSchema = z.object({
     title: z.string().max(30, 'Ticket title must be less than 30 characters'),

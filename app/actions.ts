@@ -77,10 +77,22 @@ export async function getProjects() {
     return response.json()
 }
 
-export async function createTicket(ticket: Ticket) {
-    const response = await fetch('http://localhost:3000/api/tickets', {
-        method: 'POST',
-        body: JSON.stringify(ticket)
-    })
-    return response.json()
+export async function createTicket(ticket: Ticket, projectId: string | undefined) {
+    if(!projectId) { 
+        return
+    }
+    const result = TicketFormSchema.safeParse(ticket)
+    if(result.success) {
+        const response = await fetch('http://localhost:3000/api/tickets', {
+            method: 'POST',
+            body: JSON.stringify({...result.data, projectId})
+        })
+        console.log('here')
+        // revalidateTag('get-projects')
+        return response.json()
+    }
+
+    if(result.error) {
+        return { success: false, error: result.error.format() }
+    }
 }
