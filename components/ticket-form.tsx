@@ -22,12 +22,13 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { createTicket } from '@/app/actions'
+import { createTicket, getProject } from '@/app/actions'
 import { useToast } from "@/components/ui/use-toast"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 
 import { useProjectContext } from '@/context/project-context'
+import { DialogTrigger } from '@radix-ui/react-dialog'
 
 const TicketStatusEnum = z.enum(['OPEN', 'PROGRESS', 'DONE']);
 
@@ -64,28 +65,9 @@ export default function TicketForm() {
             return
         }
 
+        const updatedProject = await getProject(currentProject?.id)
+        setCurrentProject(updatedProject)
 
-
-
-
-        /*
-        if(method === 'POST') {
-            const result = await createProject(values);
-            if(!result) {
-                console.log('error')
-                return
-            }
-            if(result.error) {
-                console.error(result.error)
-                return
-            }
-            
-            setProject(result)
-            toast({
-                description: 'Project created!',
-            })
-            return
-        }*/
     }
 
     return (
@@ -168,7 +150,9 @@ export default function TicketForm() {
                         </FormItem>
                     )}
                 />
-                <Button type="submit" className='w-full'>Submit</Button>
+                <DialogTrigger asChild>
+                    <Button type="submit" className='w-full'>Submit</Button>
+                </DialogTrigger>
             </form>
         </Form>
     )

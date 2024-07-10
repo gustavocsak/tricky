@@ -18,7 +18,7 @@ export async function POST(request: Request) {
                 }
             }
         })
-        revalidateTag('get-projects')
+        
         return Response.json(newTicket)
     } catch(e) {
         return Response.json(
