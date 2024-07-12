@@ -88,11 +88,29 @@ export async function createTicket(ticket: Ticket, projectId: string | undefined
             body: JSON.stringify({...result.data, projectId})
         })
         console.log('here')
-        // revalidateTag('get-projects')
         return response.json()
     }
 
     if(result.error) {
         return { success: false, error: result.error.format() }
     }
+}
+
+export async function deleteTicket(id: string | undefined) {
+
+    if(!id) {
+        return
+    }
+   
+    const response = await fetch(`http://localhost:3000/api/tickets/${id}`, {
+        method: 'DELETE'
+    })
+
+    if (!response.ok) {
+        throw new Error('Failed to delete ticket');
+    }
+    
+    revalidateTag('get-projects')
+    return response.json()
+   
 }

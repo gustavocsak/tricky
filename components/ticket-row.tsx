@@ -2,7 +2,8 @@ import {
     Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
 import { Button } from "./ui/button";
-import { Cross2Icon, MagicWandIcon } from "@radix-ui/react-icons";
+import { MagicWandIcon } from "@radix-ui/react-icons";
+import TicketDelete from "./ticket-delete";
 
 interface Ticket {
     id: string;
@@ -30,9 +31,7 @@ export default function TicketRow({ ticket }: TicketRowProps) {
                 </Button>
             </TableCell>
             <TableCell>
-                <Button variant="ghost">
-                    <Cross2Icon className='text-red-600' />
-                </Button>
+                <TicketDelete />
             </TableCell>
         </TableRow>
    )

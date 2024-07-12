@@ -13,3 +13,9 @@ export async function GET(request: Request, context: any) {
 export async function PATCH(request: Request, context: any) {
 
 }
+
+
+export async function DELETE(request: Request, context: any) {
+    const { params } = context;
+    console.log(params)
+}
