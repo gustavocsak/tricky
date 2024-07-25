@@ -87,17 +87,18 @@ export async function createTicket(ticket: Ticket, projectId: string | undefined
             method: 'POST',
             body: JSON.stringify({...result.data, projectId})
         })
-        console.log('here')
+        revalidateTag('get-projects')
         return response.json()
     }
 
     if(result.error) {
+        console.log('here2')
         return { success: false, error: result.error.format() }
     }
 }
 
-export async function deleteTicket(id: string | undefined) {
-
+export async function deleteTicket(id: string) {
+    console.log(id)
     if(!id) {
         return
     }

@@ -1,4 +1,4 @@
-import AddTicket from './add-ticket';
+import TicketForm from './ticket-form';
 
 interface ProjectHeaderProps {
     title: string;
@@ -11,7 +11,7 @@ export default function ProjectHeader({ title }: ProjectHeaderProps) {
                 <h2 className='text-2xl font-bold'>
                     {title}
                 </h2>
-                <AddTicket />
+                <TicketForm />
             </section>
         </article>
     )

@@ -31,7 +31,7 @@ export default function TicketRow({ ticket }: TicketRowProps) {
                 </Button>
             </TableCell>
             <TableCell>
-                <TicketDelete />
+                <TicketDelete tid={ticket.id}/>
             </TableCell>
         </TableRow>
    )
