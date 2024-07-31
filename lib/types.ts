@@ -6,12 +6,19 @@ export interface Project {
     createdAt: string
 }
 
+enum Status {
+    OPEN = "OPEN",
+    PROGRESS = "PROGRESS",
+    CLOSED = "CLOSED"
+}
+
+
 export interface Ticket {
     id: string;
     author: string;
     title: string;
     description: string;
-    status: string;
+    status: Status;
     createdAt: string;
     projectId: string;
 }

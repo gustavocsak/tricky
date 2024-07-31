@@ -98,7 +98,7 @@ export async function createTicket(ticket: Ticket, projectId: string | undefined
 }
 
 export async function deleteTicket(id: string) {
-    console.log(id)
+
     if(!id) {
         return
     }

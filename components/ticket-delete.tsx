@@ -28,7 +28,7 @@ export default function TicketDelete({ tid } : TicketDeleteProps) {
      * Makes a DELETE request to the api at /api/projects/:id
      */
     async function handleDelete() {
-        console.log(tid)
+        
         const result = await deleteTicket(tid);
         if(!result) {
             console.log('error')
@@ -37,10 +37,7 @@ export default function TicketDelete({ tid } : TicketDeleteProps) {
         if(result.error) {
             console.error(result.error)
             return
-        }
-        
-        
-        
+        }  
         
         const updatedProject = await getProject(currentProject?.id)
         setCurrentProject(updatedProject)
@@ -48,7 +45,6 @@ export default function TicketDelete({ tid } : TicketDeleteProps) {
         toast({
             description: `Ticket ${tid} deleted successfully.`,
         })
-        // setCurrentProject(null)
         
         return
     }

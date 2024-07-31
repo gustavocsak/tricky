@@ -1,19 +1,10 @@
 import {
-    Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
+    TableCell, TableRow,
 } from "@/components/ui/table";
-import { Button } from "./ui/button";
-import { MagicWandIcon } from "@radix-ui/react-icons";
-import TicketDelete from "./ticket-delete";
 
-interface Ticket {
-    id: string;
-    author: string;
-    title: string;
-    description: string;
-    status: string;
-    createdAt: string;
-    projectId: string;
-}
+import TicketDelete from "./ticket-delete";
+import TicketForm from "./ticket-form";
+import { Ticket } from "@/lib/types";
 
 interface TicketRowProps {
     ticket: Ticket;
@@ -26,9 +17,7 @@ export default function TicketRow({ ticket }: TicketRowProps) {
             <TableCell>{ticket.author}</TableCell>
             <TableCell>{ticket.status}</TableCell>
             <TableCell>
-                <Button variant="ghost">
-                    <MagicWandIcon />
-                </Button>
+                <TicketForm ticket={ticket} method="PATCH" dialogTrigger="wand" />
             </TableCell>
             <TableCell>
                 <TicketDelete tid={ticket.id}/>

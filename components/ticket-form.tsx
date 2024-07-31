@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -21,7 +21,6 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { createTicket, getProject } from '@/app/actions'
-import { useToast } from "@/components/ui/use-toast"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useProjectContext } from '@/context/project-context'
@@ -33,8 +32,11 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
+import { MagicWandIcon } from '@radix-ui/react-icons'
+import { Ticket } from '@/lib/types' 
 
-const TicketStatusEnum = z.enum(['OPEN', 'PROGRESS', 'DONE']);
+
+const TicketStatusEnum = z.enum(['OPEN', 'PROGRESS', 'CLOSED']);
 
 const TicketFormSchema = z.object({
     title: z.string().max(30, 'Ticket title must be less than 30 characters').min(1, 'Ticket title must not be empty'),
@@ -43,45 +45,54 @@ const TicketFormSchema = z.object({
     status: TicketStatusEnum
 })
 
-export default function TicketForm() {
+interface TicketFormProps {
+    dialogTrigger: string;
+    method: string;
+    ticket?: Ticket;
+}
+
+export default function TicketForm({ dialogTrigger, method, ticket }: TicketFormProps) {
     const [open, setOpen] = useState(false);
- 
-    const { toast } = useToast()
     const { currentProject, setCurrentProject } = useProjectContext()
 
     const form = useForm<z.infer<typeof TicketFormSchema>>({
         resolver: zodResolver(TicketFormSchema),
-        // defaultValues: {
-        //     title: method === "PATCH" ? currentProject?.title : '',
-        //     author: method === "PATCH" ? currentProject?.author : '',
-        // }
+        defaultValues: {
+            title: method === "PATCH" ? ticket?.title : '',
+            author: method === "PATCH" ? ticket?.author : '',
+            description: method === "PATCH" ? ticket?.description : '',
+            status: method === "PATCH" ? ticket?.status : undefined
+        }
     })
 
     async function onSubmit(values: z.infer<typeof TicketFormSchema>) {
         //TODO: handle errors
-        console.log('syubmit')
+
         const result = await createTicket(values, currentProject?.id)
 
-        if(!result) {
+        if (!result) {
             console.log('error')
             return
         }
-        if(result.error) {
+        if (result.error) {
             console.error(result.error)
             return
         }
-        
+
         setOpen(false);
         const updatedProject = await getProject(currentProject?.id)
         setCurrentProject(updatedProject)
-        
+
 
     }
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button>New Ticket</Button>
+                {dialogTrigger == "wand" ?
+                    <Button variant={"ghost"}><MagicWandIcon /></Button> :
+                    <Button>New ticket</Button>
+                }
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
@@ -170,12 +181,12 @@ export default function TicketForm() {
                                     </FormItem>
                                 )}
                             />
-                            <Button type="submit" className='w-full'>Submit</Button>                            
+                            <Button type="submit" className='w-full'>Submit</Button>
                         </form>
                     </Form>
                 </div>
             </DialogContent>
         </Dialog>
-        
+
     )
 }
