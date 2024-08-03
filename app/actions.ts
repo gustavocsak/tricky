@@ -115,3 +115,26 @@ export async function deleteTicket(id: string) {
     return response.json()
    
 }
+
+export async function editTicket(ticket: Ticket, id: string | undefined) {
+    if(!id) {
+        return { success: false, error: 'No id provided' }
+    }
+    const result = TicketFormSchema.safeParse(ticket);
+    // console.log(project)
+    if(result.success) {
+        const response = await fetch(
+            `http://localhost:3000/api/tickets/${id}`,
+            {
+                method: 'PATCH',
+                body: JSON.stringify(result.data)
+            }
+        )
+        revalidateTag('get-projects')
+        return response.json()
+    }
+
+    if(result.error) {
+        return { success: false, error: result.error.format() }
+    }
+}

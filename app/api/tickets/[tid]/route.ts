@@ -12,7 +12,20 @@ export async function GET(request: Request, context: any) {
 }
 
 export async function PATCH(request: Request, context: any) {
+    const { params } = context;
+    const body = await request.json();
+    console.log(params);
 
+    const updatedTicket = await prisma.ticket.update({
+        where: {
+            id: params.tid
+        },
+        data: {
+            ...body
+        }
+    })
+
+    return Response.json(updatedTicket);
 }
 
 

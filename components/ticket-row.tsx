@@ -17,7 +17,7 @@ export default function TicketRow({ ticket }: TicketRowProps) {
             <TableCell>{ticket.author}</TableCell>
             <TableCell>{ticket.status}</TableCell>
             <TableCell>
-                <TicketForm ticket={ticket} method="PATCH" dialogTrigger="wand" />
+                <TicketForm ticket={ticket} method="PATCH" dialogTriggerButton="wand" title="Edit ticket" />
             </TableCell>
             <TableCell>
                 <TicketDelete tid={ticket.id}/>

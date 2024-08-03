@@ -20,7 +20,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { createTicket, getProject } from '@/app/actions'
+import { createTicket, editTicket, getProject } from '@/app/actions'
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useProjectContext } from '@/context/project-context'
@@ -33,7 +33,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { MagicWandIcon } from '@radix-ui/react-icons'
-import { Ticket } from '@/lib/types' 
+import { Ticket } from '@/lib/types'
 
 
 const TicketStatusEnum = z.enum(['OPEN', 'PROGRESS', 'CLOSED']);
@@ -46,12 +46,13 @@ const TicketFormSchema = z.object({
 })
 
 interface TicketFormProps {
-    dialogTrigger: string;
+    dialogTriggerButton: string;
     method: string;
     ticket?: Ticket;
+    title: string;
 }
 
-export default function TicketForm({ dialogTrigger, method, ticket }: TicketFormProps) {
+export default function TicketForm({ dialogTriggerButton, method, ticket, title }: TicketFormProps) {
     const [open, setOpen] = useState(false);
     const { currentProject, setCurrentProject } = useProjectContext()
 
@@ -68,35 +69,60 @@ export default function TicketForm({ dialogTrigger, method, ticket }: TicketForm
     async function onSubmit(values: z.infer<typeof TicketFormSchema>) {
         //TODO: handle errors
 
-        const result = await createTicket(values, currentProject?.id)
+        if (method === 'PATCH') {
+            if (!values.author || !values.title) {
+                console.log('error');
+                return;
+                // TODO: handle error
+            }
+            const result = await editTicket(values, ticket?.id);
+            if (!result) {
+                console.log('error');
+                return;
+            } 
+            if (result.error) {
+                console.error(result.error)
+                return
+            }
+            setOpen(false);
+            const updatedProject = await getProject(currentProject?.id)
+            setCurrentProject(updatedProject)
 
-        if (!result) {
-            console.log('error')
-            return
         }
-        if (result.error) {
-            console.error(result.error)
-            return
+
+        if (method === 'POST') {
+            if (!values.author || values.title) {
+                return;
+            }
+            const result = await createTicket(values, currentProject?.id)
+            if (!result) {
+                console.log('error')
+                return
+            }
+            if (result.error) {
+                console.error(result.error)
+                return
+            }
+
+            setOpen(false);
+            const updatedProject = await getProject(currentProject?.id)
+            setCurrentProject(updatedProject)
+
         }
-
-        setOpen(false);
-        const updatedProject = await getProject(currentProject?.id)
-        setCurrentProject(updatedProject)
-
 
     }
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                {dialogTrigger == "wand" ?
+                {dialogTriggerButton == "wand" ?
                     <Button variant={"ghost"}><MagicWandIcon /></Button> :
                     <Button>New ticket</Button>
                 }
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Create a new ticket</DialogTitle>
+                    <DialogTitle>{title}</DialogTitle>
                     <DialogDescription>
                         Add the information of your new ticket here.
                     </DialogDescription>

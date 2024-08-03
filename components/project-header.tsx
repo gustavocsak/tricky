@@ -12,7 +12,8 @@ export default function ProjectHeader({ title }: ProjectHeaderProps) {
                 <h2 className='text-2xl font-bold'>
                     {title}
                 </h2>
-                <TicketForm method="POST" dialogTrigger={"New ticket"}/>
+                <TicketForm method="POST" dialogTriggerButton={"New ticket"} title="Create a new ticket"/>
+
             </section>
         </article>
     )
