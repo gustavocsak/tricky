@@ -6,7 +6,7 @@ export interface Project {
     createdAt: string
 }
 
-enum Status {
+export enum Status {
     OPEN = "OPEN",
     PROGRESS = "PROGRESS",
     CLOSED = "CLOSED"
