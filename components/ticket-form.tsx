@@ -67,7 +67,8 @@ export default function TicketForm({ dialogTriggerButton, method, ticket, title 
     })
 
     async function onSubmit(values: z.infer<typeof TicketFormSchema>) {
-        //TODO: handle errors
+        //TODO: handle errors   
+        
 
         if (method === 'PATCH') {
             if (!values.author || !values.title) {
@@ -91,9 +92,11 @@ export default function TicketForm({ dialogTriggerButton, method, ticket, title 
         }
 
         if (method === 'POST') {
-            if (!values.author || values.title) {
+            
+            if (!values.author || !values.title) {
                 return;
             }
+            
             const result = await createTicket(values, currentProject?.id)
             if (!result) {
                 console.log('error')
