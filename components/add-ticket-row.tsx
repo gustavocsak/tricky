@@ -63,16 +63,15 @@ export default function AddTicketRow() {
 	})
 
 	return (
-		<div className='p-2 border-2 border-primary w-full'>
+		<div className='border-2 border-primary w-full'>
 			<Form {...form}>
-				<form className='flex flex-row w-full' onSubmit={form.handleSubmit(onSubmit)}>
+				<form className='flex flex-row w-full items-center' onSubmit={form.handleSubmit(onSubmit)}>
 					
 					<FormField
-						
 						control={form.control}
 						name="title"
 						render={({ field }) => (
-							<FormItem className='w-4/12'>
+							<FormItem className='w-3/12 ps-2 pe-1 py-2'>
 								<FormControl>
 									<Input placeholder="Your ticket title" {...field} />
 								</FormControl>
@@ -85,7 +84,7 @@ export default function AddTicketRow() {
 						control={form.control}
 						name="description"
 						render={({ field }) => (
-							<FormItem className='w-4/12'>
+							<FormItem className='w-4/12 ps-1 pe-1 py-2'>
 								<FormControl>
 									<Input placeholder="My new ticket description" {...field} />				
 								</FormControl>								
@@ -93,13 +92,14 @@ export default function AddTicketRow() {
 							</FormItem>
 						)}
 					/>
+					
 					<FormField
 						control={form.control}
 						name="author"
 						render={({ field }) => (
-							<FormItem className='w-2/12'>
+							<FormItem className='w-1/12 ps-1'>
 								<FormControl>
-									<Input placeholder="Ticket's author" {...field} />
+									<Input placeholder="Author" {...field} />
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -109,7 +109,7 @@ export default function AddTicketRow() {
 						control={form.control}
 						name="status"
 						render={({ field }) => (
-							<FormItem className='w-2/12'>
+							<FormItem className='w-2/12 py-2 ps-2'>
 								<Select onValueChange={field.onChange} defaultValue={field.value}>
 									<FormControl>
 										<SelectTrigger>
@@ -126,8 +126,11 @@ export default function AddTicketRow() {
 							</FormItem>
 						)}
 					/>
+					<div className="w-2/12 p-2">
+					<Button className='w-full'>Add ticket</Button>
+					</div>
 					
-					<Button className='w-2/12'>Add ticket</Button>
+					
 				</form>
 			</Form>
 		</div>

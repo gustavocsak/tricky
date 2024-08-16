@@ -19,8 +19,8 @@ export default function TicketTable({ tickets }: TicketTableProps) {
             <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="w-8/12 font-medium">Title</TableHead>
-                        <TableHead className="w-2/12 font-medium">Author</TableHead>
+                        <TableHead className="w-7/12 font-medium">Title</TableHead>
+                        <TableHead className="w-1/12 font-medium">Author</TableHead>
                         <TableHead className="w-2/12 font-medium">Status</TableHead>
                         <TableHead className="w-1/12 font-medium text-center">Edit</TableHead>
                         <TableHead className="w-1/12 font-medium">Delete</TableHead>
