@@ -13,14 +13,14 @@ import {
   } from "@/components/ui/alert-dialog"
 import { useToast } from "./ui/use-toast";
 import { useProjectContext } from "@/context/project-context";
-import { deleteTicket, getProject } from "@/app/actions";
+import { deleteTicket } from "@/app/actions";
 
 interface TicketDeleteProps {
     tid: string
 }
 
 export default function TicketDelete({ tid } : TicketDeleteProps) {
-    const { currentProject, setCurrentProject } = useProjectContext();
+    const { currentProject } = useProjectContext();
     const { toast } = useToast()
 
     /**

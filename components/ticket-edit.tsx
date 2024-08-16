@@ -66,7 +66,6 @@ export default function TicketEdit({ ticket }: TicketFormProps) {
     async function onSubmit(values: z.infer<typeof TicketFormSchema>) {
         //TODO: handle errors   
         
-
         if (!values.author || !values.title) {
             console.log('error');
             return;
@@ -82,8 +81,12 @@ export default function TicketEdit({ ticket }: TicketFormProps) {
             return
         }
         setOpen(false);
-        const updatedProject = await getProject(currentProject?.id)
-        setCurrentProject(updatedProject)
+        if (currentProject) {
+            const editIndex = currentProject.tickets.findIndex((t) => {
+                return t.id == ticket?.id
+            })
+            currentProject.tickets[editIndex] = result;
+        }
     }
 
     return (
@@ -184,6 +187,5 @@ export default function TicketEdit({ ticket }: TicketFormProps) {
                 </div>
             </DialogContent>
         </Dialog>
-
     )
 }
