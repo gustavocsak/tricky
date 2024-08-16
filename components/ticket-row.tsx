@@ -29,19 +29,19 @@ export default function TicketRow({ ticket }: TicketRowProps) {
     const variant = mapStatus(ticket.status);
 
     return (
-        <TableRow key={ticket.id}>
-            <TableCell>
+        <TableRow key={ticket.id} className="p-2">
+            <TableCell className="p-0">
                 <div className="flex flex-col gap-4">
                     <p className="font-medium">{ticket.title}</p>
                     <p className="text-zinc-400">{ticket.description}</p>
                 </div>
             </TableCell>
-            <TableCell>{ticket.author}</TableCell>
-            <TableCell><Badge variant={variant}>{statusDisplay}</Badge></TableCell>
-            <TableCell className="text-center">
+            <TableCell className="p-0">{ticket.author}</TableCell>
+            <TableCell className="p-0"><Badge variant={variant}>{statusDisplay}</Badge></TableCell>
+            <TableCell className="text-center p-0">
                 <TicketForm ticket={ticket} method="PATCH" dialogTriggerButton="wand" title="Edit ticket" />
             </TableCell>
-            <TableCell>
+            <TableCell className="p-0">
                 <TicketDelete tid={ticket.id}/>
             </TableCell>
         </TableRow>

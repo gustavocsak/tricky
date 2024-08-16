@@ -19,11 +19,11 @@ export default function TicketTable({ tickets }: TicketTableProps) {
             <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="font-medium">Title</TableHead>
-                        <TableHead className="w-[200px] font-medium">Author</TableHead>
-                        <TableHead className="w-[200px] font-medium">Status</TableHead>
-                        <TableHead className="w-[60px] font-medium text-center">Edit</TableHead>
-                        <TableHead className="w-[60px] font-medium">Delete</TableHead>
+                        <TableHead className="w-8/12 font-medium">Title</TableHead>
+                        <TableHead className="w-2/12 font-medium">Author</TableHead>
+                        <TableHead className="w-2/12 font-medium">Status</TableHead>
+                        <TableHead className="w-1/12 font-medium text-center">Edit</TableHead>
+                        <TableHead className="w-1/12 font-medium">Delete</TableHead>
                     </TableRow>
                 </TableHeader>   
                 <TableBody>
@@ -31,10 +31,11 @@ export default function TicketTable({ tickets }: TicketTableProps) {
                         <TicketRow key={ticket.id} ticket={ticket} />
                     ))}
                 </TableBody>    
-                <TableFooter>
-                    <AddTicketRow />
-                </TableFooter>
+                
+                    
+                
             </Table>
+            <AddTicketRow />
         </div>
     )
 }
