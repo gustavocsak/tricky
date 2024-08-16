@@ -1,5 +1,6 @@
 "use client"
 
+import { Ticket } from '@/lib/types'
 import React, { createContext, useContext, useState } from 'react'
 
 type ProjectContextProviderProps = {
@@ -10,7 +11,7 @@ type Project = {
   id: string,
   title: string,
   author: string,
-  tickets: [],
+  tickets: Ticket[],
   createdAt: string
 }
 

@@ -4,7 +4,6 @@ import {
 } from "@/components/ui/table";
 
 import TicketRow from './ticket-row';
-import LoadingRow from './loading-row';
 import { Ticket } from '@/lib/types';
 import AddTicketRow from './add-ticket-row';
 
@@ -15,7 +14,7 @@ interface TicketTableProps {
 export default function TicketTable({ tickets }: TicketTableProps) {
     
     return (
-        <div className="rounded-md sm:border">
+        <div className="rounded-md">
             <Table>
                 <TableHeader>
                     <TableRow>
@@ -31,9 +30,6 @@ export default function TicketTable({ tickets }: TicketTableProps) {
                         <TicketRow key={ticket.id} ticket={ticket} />
                     ))}
                 </TableBody>    
-                
-                    
-                
             </Table>
             <AddTicketRow />
         </div>
