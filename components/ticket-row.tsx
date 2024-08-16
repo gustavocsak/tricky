@@ -3,7 +3,7 @@ import {
 } from "@/components/ui/table";
 
 import TicketDelete from "./ticket-delete";
-import TicketForm from "./ticket-form";
+import TicketEdit from "./ticket-edit";
 import { Ticket } from "@/lib/types";
 import { Badge } from "./ui/badge";
 import { Status } from "@/lib/types";
@@ -39,7 +39,7 @@ export default function TicketRow({ ticket }: TicketRowProps) {
             <TableCell>{ticket.author}</TableCell>
             <TableCell><Badge variant={variant}>{statusDisplay}</Badge></TableCell>
             <TableCell className="text-center">
-                <TicketForm ticket={ticket} method="PATCH" dialogTriggerButton="wand" title="Edit ticket" />
+                <TicketEdit ticket={ticket} />
             </TableCell>
             <TableCell>
                 <TicketDelete tid={ticket.id}/>
