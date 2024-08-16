@@ -27,7 +27,7 @@ export default function TicketRow({ ticket }: TicketRowProps) {
     }
     const statusDisplay = ticket.status.toString().charAt(0) + ticket.status.toLowerCase().substring(1);
     const variant = mapStatus(ticket.status);
-
+    
     return (
         <TableRow key={ticket.id}>
             <TableCell>

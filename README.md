@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Tricky
 
-## Getting Started
+A ticket tracking system that allows users to create, update, delete, and manage tasks for various projects
 
-First, run the development server:
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+[![Tricky][tricky-screenshot]](#)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Tricky is a ticket/task tracking tool. It enhances your productivity by letting you create tickets to
+track progress on your tasks or even in your group tasks.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You can separate tickets by projects to better organize your workflow.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Other features include:
+* creating, editing and removing tickets
+* creating, editing and removing projects
+* dark, light and system mode to better suit your preferences
 
-## Learn More
+Currently working on a login/contribution between users making it possible to invite others to your projects.
 
-To learn more about Next.js, take a look at the following resources:
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+### Built With
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<p></p>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+* [![Next][Next.js]][Next-url]
+* [![Tailwind][Tailwindcss]][Tailwindcss-url]
+* [![MongoDB][MongoDB]][MongoDB-url]
+* [![Prisma][Prisma]][Prisma-url]
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+[tricky-screenshot]: public/tricky.jpg
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
+[Tailwindcss]: https://img.shields.io/badge/tailwindcss-0F172A?&logo=tailwindcss
+[Tailwindcss-url]: https://tailwindcss.com/
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[MongoDB]: https://img.shields.io/badge/-MongoDB-4DB33D?style=flat&logo=mongodb&logoColor=FFFFFF
+[MongoDB-url]: https://www.mongodb.com/
+[Prisma]: https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white
+[Prisma-url]: https://www.prisma.io/
