@@ -1,4 +1,4 @@
-import TicketForm from './ticket-form';
+import TicketForm from './ticket-edit';
 
 interface ProjectHeaderProps {
     title: string;

@@ -46,23 +46,20 @@ const TicketFormSchema = z.object({
 })
 
 interface TicketFormProps {
-    dialogTriggerButton: string;
-    method: string;
     ticket?: Ticket;
-    title: string;
 }
 
-export default function TicketForm({ dialogTriggerButton, method, ticket, title }: TicketFormProps) {
+export default function TicketEdit({ ticket }: TicketFormProps) {
     const [open, setOpen] = useState(false);
     const { currentProject, setCurrentProject } = useProjectContext()
 
     const form = useForm<z.infer<typeof TicketFormSchema>>({
         resolver: zodResolver(TicketFormSchema),
         defaultValues: {
-            title: method === "PATCH" ? ticket?.title : '',
-            author: method === "PATCH" ? ticket?.author : '',
-            description: method === "PATCH" ? ticket?.description : '',
-            status: method === "PATCH" ? ticket?.status : undefined
+            title: ticket?.title,
+            author: ticket?.author,
+            description: ticket?.description,
+            status: ticket?.status
         }
     })
 
@@ -70,62 +67,33 @@ export default function TicketForm({ dialogTriggerButton, method, ticket, title 
         //TODO: handle errors   
         
 
-        if (method === 'PATCH') {
-            if (!values.author || !values.title) {
-                console.log('error');
-                return;
-                // TODO: handle error
-            }
-            const result = await editTicket(values, ticket?.id);
-            if (!result) {
-                console.log('error');
-                return;
-            } 
-            if (result.error) {
-                console.error(result.error)
-                return
-            }
-            setOpen(false);
-            const updatedProject = await getProject(currentProject?.id)
-            setCurrentProject(updatedProject)
-
+        if (!values.author || !values.title) {
+            console.log('error');
+            return;
+            // TODO: handle error
         }
-
-        if (method === 'POST') {
-            
-            if (!values.author || !values.title) {
-                return;
-            }
-            
-            const result = await createTicket(values, currentProject?.id)
-            if (!result) {
-                console.log('error')
-                return
-            }
-            if (result.error) {
-                console.error(result.error)
-                return
-            }
-
-            setOpen(false);
-            const updatedProject = await getProject(currentProject?.id)
-            setCurrentProject(updatedProject)
-
+        const result = await editTicket(values, ticket?.id);
+        if (!result) {
+            console.log('error');
+            return;
+        } 
+        if (result.error) {
+            console.error(result.error)
+            return
         }
-
+        setOpen(false);
+        const updatedProject = await getProject(currentProject?.id)
+        setCurrentProject(updatedProject)
     }
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                {dialogTriggerButton == "wand" ?
-                    <Button variant={"ghost"}><MagicWandIcon /></Button> :
-                    <Button>New ticket</Button>
-                }
+                <Button variant={"ghost"}><MagicWandIcon /></Button> 
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>{title}</DialogTitle>
+                    <DialogTitle>Edit Ticket</DialogTitle>
                     <DialogDescription>
                         Add the information of your new ticket here.
                     </DialogDescription>
