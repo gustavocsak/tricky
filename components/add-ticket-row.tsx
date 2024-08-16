@@ -57,7 +57,7 @@ export default function AddTicketRow() {
 	})
 
 	return (
-		<div className='border-2 border-primary rounded w-full'>
+		<div className='border-2 border-primary rounded w-full mt-2'>
 			<Form {...form}>
 				<form className='flex flex-row w-full items-center' onSubmit={form.handleSubmit(onSubmit)}>
 					

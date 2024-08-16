@@ -39,14 +39,15 @@ export default function TicketDelete({ tid } : TicketDeleteProps) {
             return
         }  
         
-        const updatedProject = await getProject(currentProject?.id)
-        setCurrentProject(updatedProject)
+        if (currentProject) {
+            currentProject.tickets = currentProject?.tickets.filter((ticket) => {
+                return ticket.id !== tid;
+            })
+        }
 
         toast({
             description: `Ticket ${tid} deleted successfully.`,
         })
-        
-        return
     }
 
     return (

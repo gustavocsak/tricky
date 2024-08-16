@@ -30,7 +30,6 @@ export async function editProject(project: Project, id: string | undefined) {
         return { success: false, error: 'No id provided' }
     }
     const result = ProjectFormSchema.safeParse(project)
-    // console.log(project)
     if(result.success) {
         const response = await fetch(
             `http://localhost:3000/api/projects/${id}`,
@@ -64,7 +63,6 @@ export async function deleteProject(id: string | undefined) {
     
     revalidateTag('get-projects')
     return response.json()
-   
 }
 
 export async function getProject(id: string | undefined) {
@@ -92,7 +90,6 @@ export async function createTicket(ticket: Ticket, projectId: string | undefined
     }
 
     if(result.error) {
-        console.log('here2')
         return { success: false, error: result.error.format() }
     }
 }
