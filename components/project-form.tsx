@@ -26,9 +26,10 @@ const ProjectFormSchema = z.object({
 
 interface ProjectFormProps {
     method: 'PATCH' | 'PUT' | 'POST';
+    setDrawerOpen?: any;
 }
 
-const ProjectForm: React.FC<ProjectFormProps> = ({ method }) => {
+const ProjectForm: React.FC<ProjectFormProps> = ({ method, setDrawerOpen }) => {
     const { toast } = useToast()
     const { currentProject, setCurrentProject } = useProjectContext()
 
@@ -51,16 +52,16 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ method }) => {
                 console.log('error')
                 return
             }
-            
+
             if(result.error) {
                 console.error(result.error)
                 return
             }
-            
             setCurrentProject({...result, tickets: currentProject?.tickets})
             toast({
                 description: 'Project updated successfully!',
             })
+            setDrawerOpen(false);
             return
         }
 
@@ -74,7 +75,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ method }) => {
                 console.error(result.error)
                 return
             }
-            
+
             setCurrentProject(result)
             toast({
                 description: 'Project created!',

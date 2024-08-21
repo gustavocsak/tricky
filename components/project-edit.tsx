@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
 	Drawer,
 	DrawerClose,
 	DrawerContent,
 	DrawerDescription,
-	DrawerFooter,
 	DrawerHeader,
 	DrawerTitle,
 	DrawerTrigger,
@@ -13,9 +12,10 @@ import ProjectForm from './project-form'
 import { Button } from "@/components/ui/button"
 
 const ProjectEdit = () => {
+	const [open, setOpen] = useState(false);
 
 	return (
-		<Drawer>
+		<Drawer open={open} onOpenChange={setOpen}>
 			<DrawerTrigger asChild>
 				<Button variant='secondary'>Edit Project</Button>
 			</DrawerTrigger>
@@ -25,7 +25,7 @@ const ProjectEdit = () => {
 					<DrawerDescription>Change the project title and author</DrawerDescription>
 				</DrawerHeader>
 				<div className='lg:w-1/4'>
-					<ProjectForm method="PATCH" />
+					<ProjectForm method="PATCH" setDrawerOpen={setOpen} />
 					<DrawerClose className='mt-2 w-full'>
 						<Button variant="outline" className='w-full'>Close</Button>
 					</DrawerClose>

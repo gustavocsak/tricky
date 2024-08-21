@@ -20,7 +20,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { createTicket, editTicket, getProject } from '@/app/actions'
+import { editTicket } from '@/app/actions'
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useProjectContext } from '@/context/project-context'
@@ -64,8 +64,8 @@ export default function TicketEdit({ ticket }: TicketFormProps) {
     })
 
     async function onSubmit(values: z.infer<typeof TicketFormSchema>) {
-        //TODO: handle errors   
-        
+        //TODO: handle errors
+
         if (!values.author || !values.title) {
             console.log('error');
             return;
@@ -75,7 +75,7 @@ export default function TicketEdit({ ticket }: TicketFormProps) {
         if (!result) {
             console.log('error');
             return;
-        } 
+        }
         if (result.error) {
             console.error(result.error)
             return
@@ -92,7 +92,7 @@ export default function TicketEdit({ ticket }: TicketFormProps) {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button variant={"ghost"}><MagicWandIcon /></Button> 
+                <Button variant={"ghost"}><MagicWandIcon /></Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>

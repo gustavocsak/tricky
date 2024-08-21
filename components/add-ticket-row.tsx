@@ -48,7 +48,7 @@ export default function AddTicketRow() {
 			console.error(result.error);
 			return;
 		}
-		
+
 		currentProject?.tickets.push(result)
 	}
 
@@ -60,7 +60,7 @@ export default function AddTicketRow() {
 		<div className='border-2 border-primary rounded w-full mt-2'>
 			<Form {...form}>
 				<form className='flex flex-row w-full items-center' onSubmit={form.handleSubmit(onSubmit)}>
-					
+
 					<FormField
 						control={form.control}
 						name="title"
@@ -69,7 +69,7 @@ export default function AddTicketRow() {
 								<FormControl>
 									<Input placeholder="Your ticket title" {...field} />
 								</FormControl>
-								
+
 								<FormMessage />
 							</FormItem>
 						)}
@@ -80,13 +80,13 @@ export default function AddTicketRow() {
 						render={({ field }) => (
 							<FormItem className='w-4/12 ps-1 pe-1 py-2'>
 								<FormControl>
-									<Input placeholder="My new ticket description" {...field} />				
-								</FormControl>								
+									<Input placeholder="My new ticket description" {...field} />
+								</FormControl>
 								<FormMessage />
 							</FormItem>
 						)}
 					/>
-					
+
 					<FormField
 						control={form.control}
 						name="author"
@@ -129,11 +129,9 @@ export default function AddTicketRow() {
 					<div className="w-2/12 p-2">
 					<Button className='w-full'>Add ticket</Button>
 					</div>
-					
-					
 				</form>
 			</Form>
 		</div>
-	
+
 	)
 }
