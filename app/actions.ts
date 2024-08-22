@@ -52,7 +52,7 @@ export async function deleteProject(id: string | undefined) {
     if(!id) {
         return
     }
-   
+
     const response = await fetch(`http://localhost:3000/api/projects/${id}`, {
         method: 'DELETE'
     })
@@ -60,7 +60,7 @@ export async function deleteProject(id: string | undefined) {
     if (!response.ok) {
         throw new Error('Failed to delete project');
     }
-    
+
     revalidateTag('get-projects')
     return response.json()
 }
@@ -76,7 +76,7 @@ export async function getProjects() {
 }
 
 export async function createTicket(ticket: Ticket, projectId: string | undefined) {
-    if(!projectId) { 
+    if(!projectId) {
         return
     }
     const result = TicketFormSchema.safeParse(ticket)
@@ -99,7 +99,7 @@ export async function deleteTicket(id: string) {
     if(!id) {
         return
     }
-   
+
     const response = await fetch(`http://localhost:3000/api/tickets/${id}`, {
         method: 'DELETE'
     })
@@ -107,10 +107,10 @@ export async function deleteTicket(id: string) {
     if (!response.ok) {
         throw new Error('Failed to delete ticket');
     }
-    
+
     revalidateTag('get-projects')
     return response.json()
-   
+
 }
 
 export async function editTicket(ticket: Ticket, id: string | undefined) {
@@ -134,4 +134,9 @@ export async function editTicket(ticket: Ticket, id: string | undefined) {
     if(result.error) {
         return { success: false, error: result.error.format() }
     }
+}
+
+export async function getLatestTickets() {
+    const response = await fetch('http://localhost:3000/api/tickets');
+    return response.json();
 }

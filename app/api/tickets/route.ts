@@ -3,8 +3,8 @@ import prisma from "../db";
 import { revalidateTag } from "next/cache";
 
 export async function POST(request: Request) {
-    
-    const body = await request.json();    
+
+    const body = await request.json();
 
     try {
         const newTicket = await prisma.ticket.create({
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
                 }
             }
         })
-        
+
         return Response.json(newTicket)
     } catch(e) {
         return Response.json(
@@ -30,5 +30,17 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request, context: any) {
     const { searchParams } = context;
-    console.log(searchParams)
-}   
+    try {
+        const tickets = await prisma.ticket.findMany({
+            orderBy: {
+                createdAt: 'desc'
+            }
+        });
+        return Response.json(tickets);
+    } catch (e) {
+        return Response.json(
+            { error: e },
+            { status: 500 }
+        )
+    }
+}
