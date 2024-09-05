@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 import Navbar from "@/components/navbar";
+import ProjectContextProvider from "@/context/project-context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,8 +22,10 @@ export default function RootLayout({
     <html lang="en" style={{ height: "100%" }}>
       <body className={`${inter.className} h-full bg-background`}>
         <ThemeProvider>
+          <ProjectContextProvider>
             <Navbar />
             {children}
+            </ProjectContextProvider>
         </ThemeProvider>
       </body>
     </html>

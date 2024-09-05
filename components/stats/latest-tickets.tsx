@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card"
 import { useEffect, useState } from "react"
 import { Status, Ticket } from "@/lib/types"
+import { Badge } from "../ui/badge"
 
 export default function LatestTickets() {
 
@@ -16,7 +17,7 @@ export default function LatestTickets() {
   useEffect(() => {
     async function fetchTickets() {
       const latestTickets = await getLatestTickets();
-      setTickets(latestTickets.slice(0,3));
+      setTickets(latestTickets.slice(0, 3));
     }
     fetchTickets();
   }, []);
@@ -25,12 +26,12 @@ export default function LatestTickets() {
     <Card>
       <CardHeader>
         <CardTitle>Latest tickets</CardTitle>
-        <CardDescription>Here are your latest added tickets</CardDescription>
+        <CardDescription>Here are your three latest added tickets</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
-          {tickets.map(ticket => {
-            return <TicketCard title={ticket.title} createdAt={ticket.createdAt} status={ticket.status} />
-          })}
+        {tickets.map(ticket => {
+          return <TicketCard title={ticket.title} createdAt={ticket.createdAt} status={ticket.status} />
+        })}
       </CardContent>
     </Card>
   )
@@ -42,13 +43,30 @@ interface TicketProps {
   status: Status
 }
 
-function TicketCard({title, createdAt, status}: TicketProps) {
+
+
+function TicketCard({ title, createdAt, status }: TicketProps) {
+  const mapStatus = (status: Status) => {
+    switch(status) {
+        case Status.OPEN:
+            return "open";
+        case Status.CLOSED:
+            return "closed";
+        case Status.PROGRESS:
+            return "progress";
+        default:
+            return "default";
+    }
+  }
+  const statusDisplay = status.toString().charAt(0) + status.toLowerCase().substring(1);
+  const variant = mapStatus(status);
   return (
-    <div className="flex items-center-space-x-4 rounded-md border p-2">
-      <p className="text-sm">{title}</p>
-      <p className="text-sm">{createdAt}</p>
-      <p className="text-sm">{status}</p>
+    <div className="flex flex-row justify-around rounded-md border p-2">
+      <div className="text-center text-sm w-4/12">{title}</div>
+      <div className="text-center text-sm w-4/12">{createdAt.slice(0,10)}</div>
+      <div className="text-center text-sm w-4/12"><Badge variant={variant}>{statusDisplay}</Badge></div>
     </div>
 
   )
 }
+
