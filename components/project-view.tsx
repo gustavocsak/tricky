@@ -12,7 +12,7 @@ export default function ProjectView() {
 
 	return (
 
-		<div className="p-4 w-full flex flex-col gap-4 justify-between">
+		<div className="py-4 ps-4 w-full flex flex-col gap-4 justify-between">
 			{currentProject ? (
 				<>
 					<article>
@@ -28,7 +28,7 @@ export default function ProjectView() {
 				</>
 			): (
 				// TODO: improve the no-project selected screen
-				<h2 className="p-4 text-4xl font-bold">Welcome to tricky <Stats /></h2>
+				<Stats />
 			)}
 		</div>
 	)

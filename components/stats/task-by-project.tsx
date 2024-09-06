@@ -58,7 +58,7 @@ export default function TaskByProject() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Tickets by Project</CardTitle>
+        <CardTitle className="text-4xl">Tickets by Project</CardTitle>
         <CardDescription>How are tasks going throughout your projects</CardDescription>
       </CardHeader>
       <CardContent>

@@ -25,7 +25,7 @@ export default function LatestTickets() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Latest tickets</CardTitle>
+        <CardTitle className="text-4xl">Latest tickets</CardTitle>
         <CardDescription>Here are your three latest added tickets</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
