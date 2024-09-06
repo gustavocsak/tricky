@@ -34,6 +34,7 @@ import {
 } from "@/components/ui/dialog"
 import { MagicWandIcon } from '@radix-ui/react-icons'
 import { Ticket } from '@/lib/types'
+import { Badge } from './ui/badge'
 
 
 const TicketStatusEnum = z.enum(['OPEN', 'PROGRESS', 'CLOSED']);
@@ -169,9 +170,9 @@ export default function TicketEdit({ ticket }: TicketFormProps) {
                                                 </SelectTrigger>
                                             </FormControl>
                                             <SelectContent>
-                                                <SelectItem value="OPEN">Open</SelectItem>
-                                                <SelectItem value="PROGRESS">In progress</SelectItem>
-                                                <SelectItem value="CLOSED">Closed</SelectItem>
+                                                <SelectItem value="OPEN"><Badge variant="open">Open</Badge></SelectItem>
+                                                <SelectItem value="PROGRESS"><Badge variant="progress">Progress</Badge></SelectItem>
+                                                <SelectItem value="CLOSED"><Badge variant="closed">Closed</Badge></SelectItem>
                                             </SelectContent>
                                         </Select>
                                         <FormDescription>
