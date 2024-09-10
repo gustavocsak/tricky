@@ -5,8 +5,10 @@ import {
 import TicketDelete from "./ticket-delete";
 import TicketEdit from "./ticket-edit";
 import { Ticket } from "@/lib/types";
-import { Badge } from "./ui/badge";
+
 import { Status } from "@/lib/types";
+import SelectStatusOnRow from "./select-status-on-row";
+
 
 interface TicketRowProps {
     ticket: Ticket;
@@ -27,7 +29,7 @@ export default function TicketRow({ ticket }: TicketRowProps) {
     }
     const statusDisplay = ticket.status.toString().charAt(0) + ticket.status.toLowerCase().substring(1);
     const variant = mapStatus(ticket.status);
-    
+
     return (
         <TableRow key={ticket.id}>
             <TableCell>
@@ -37,7 +39,10 @@ export default function TicketRow({ ticket }: TicketRowProps) {
                 </div>
             </TableCell>
             <TableCell>{ticket.author}</TableCell>
-            <TableCell><Badge variant={variant}>{statusDisplay}</Badge></TableCell>
+            <TableCell>
+                <SelectStatusOnRow ticket={ticket} />
+            </TableCell>
+
             <TableCell className="text-center">
                 <TicketEdit ticket={ticket} />
             </TableCell>

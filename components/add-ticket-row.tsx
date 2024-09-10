@@ -127,7 +127,7 @@ export default function AddTicketRow() {
 						)}
 					/>
 					<div className="w-2/12 p-2">
-					<Button className='w-full'>Add ticket</Button>
+						<Button className='w-full'>Add ticket</Button>
 					</div>
 				</form>
 			</Form>
