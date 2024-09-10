@@ -31,6 +31,8 @@ interface SelectStatusOnRowProps {
 export default function SelectStatusOnRow({ ticket }: SelectStatusOnRowProps) {
   const { currentProject } = useProjectContext();
   async function onSubmit(values: z.infer<typeof TicketFormSchema>) {
+    console.log(values)
+    console.log(ticket)
     const result = await editTicket({...ticket, status: values.status}, ticket.id);
     if (!result) {
       console.log('error');

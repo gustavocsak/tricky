@@ -35,16 +35,7 @@ import {
 import { MagicWandIcon } from '@radix-ui/react-icons'
 import { Ticket } from '@/lib/types'
 import { Badge } from './ui/badge'
-
-
-const TicketStatusEnum = z.enum(['OPEN', 'PROGRESS', 'CLOSED']);
-
-const TicketFormSchema = z.object({
-    title: z.string().max(30, 'Ticket title must be less than 30 characters').min(1, 'Ticket title must not be empty'),
-    author: z.string().max(30, 'Author name must be less than 30 characters').min(1, 'Author name must not be empty'),
-    description: z.string().max(100, 'Description must be less than 100 characters').optional(),
-    status: TicketStatusEnum
-})
+import TicketFormSchema from '@/lib/schemas/ticket'
 
 interface TicketFormProps {
     ticket?: Ticket;
@@ -148,6 +139,7 @@ export default function TicketEdit({ ticket }: TicketFormProps) {
                                                 placeholder="The new feature should have a button to create a new project."
                                                 className="resize-none"
                                                 {...field}
+                                                value={field.value ?? ''}
                                             />
                                         </FormControl>
                                         <FormDescription>
