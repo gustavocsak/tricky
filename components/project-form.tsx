@@ -29,7 +29,7 @@ interface ProjectFormProps {
     setDrawerOpen?: any;
 }
 
-const ProjectForm: React.FC<ProjectFormProps> = ({ method, setDrawerOpen }) => {
+export default function ProjectForm({ method, setDrawerOpen }: ProjectFormProps) {
     const { toast } = useToast()
     const { currentProject, setCurrentProject } = useProjectContext()
 
@@ -124,5 +124,3 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ method, setDrawerOpen }) => {
         </Form>
     )
 }
-
-export default ProjectForm

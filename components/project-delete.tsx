@@ -15,7 +15,7 @@ import {
 import { deleteProject } from '@/app/actions'
 import { useToast } from "@/components/ui/use-toast"
 
-const ProjectDelete = () => {
+export default function ProjectDelete() {
     const { currentProject, setCurrentProject } = useProjectContext();
     const { toast } = useToast()
 
@@ -33,13 +33,13 @@ const ProjectDelete = () => {
             console.error(result.error)
             return
         }
-        
+
         toast({
             description: `Project ${currentProject?.title} deleted successfully.`,
         })
 
         setCurrentProject(null)
-        
+
         return
     }
 
@@ -60,7 +60,7 @@ const ProjectDelete = () => {
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogAction 
+                    <AlertDialogAction
                         onClick={handleDelete}
                         variant='destructive'
                     >
@@ -72,5 +72,3 @@ const ProjectDelete = () => {
         </AlertDialog>
     )
 }
-
-export default ProjectDelete

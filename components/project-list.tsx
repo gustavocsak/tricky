@@ -2,6 +2,7 @@
 import ProjectCard from './project-card';
 import { useProjectContext } from '@/context/project-context';
 import { Project } from '@/lib/types';
+
 interface ProjectListProps {
     data: Project[];
 }

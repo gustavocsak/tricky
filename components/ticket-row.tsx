@@ -5,31 +5,13 @@ import {
 import TicketDelete from "./ticket-delete";
 import TicketEdit from "./ticket-edit";
 import { Ticket } from "@/lib/types";
-
-import { Status } from "@/lib/types";
 import SelectStatusOnRow from "./select-status-on-row";
-
 
 interface TicketRowProps {
     ticket: Ticket;
 }
 
 export default function TicketRow({ ticket }: TicketRowProps) {
-    const mapStatus = (status: Status) => {
-        switch(status) {
-            case Status.OPEN:
-                return "open";
-            case Status.CLOSED:
-                return "closed";
-            case Status.PROGRESS:
-                return "progress";
-            default:
-                return "default";
-        }
-    }
-    const statusDisplay = ticket.status.toString().charAt(0) + ticket.status.toLowerCase().substring(1);
-    const variant = mapStatus(ticket.status);
-
     return (
         <TableRow key={ticket.id}>
             <TableCell>
@@ -42,7 +24,6 @@ export default function TicketRow({ ticket }: TicketRowProps) {
             <TableCell>
                 <SelectStatusOnRow ticket={ticket} />
             </TableCell>
-
             <TableCell className="text-center">
                 <TicketEdit ticket={ticket} />
             </TableCell>

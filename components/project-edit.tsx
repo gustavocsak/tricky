@@ -11,7 +11,7 @@ import {
 import ProjectForm from './project-form'
 import { Button } from "@/components/ui/button"
 
-const ProjectEdit = () => {
+export default function ProjectEdit() {
 	const [open, setOpen] = useState(false);
 
 	return (
@@ -34,5 +34,3 @@ const ProjectEdit = () => {
 		</Drawer>
 	)
 }
-
-export default ProjectEdit
