@@ -8,12 +8,11 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
-
     const { currentProject, setCurrentProject } = useProjectContext();
 
     return (
         <li>
-            <Button 
+            <Button
                 variant={currentProject?.id === project.id ? 'default' : 'ghost'}
                 className='w-full flex gap-4 justify-start items-center'
                 onClick={() => setCurrentProject(project)}
