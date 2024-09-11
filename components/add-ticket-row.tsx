@@ -21,13 +21,7 @@ import { Badge } from './ui/badge'
 import { useForm } from 'react-hook-form'
 import { createTicket } from '@/app/actions'
 import { useProjectContext } from '@/context/project-context'
-const TicketStatusEnum = z.enum(['OPEN', 'PROGRESS', 'CLOSED']);
-const TicketFormSchema = z.object({
-	title: z.string().max(30, 'Ticket title must be less than 30 characters').min(1, 'Ticket title must not be empty'),
-	author: z.string().max(30, 'Author name must be less than 30 characters').min(1, 'Author name must not be empty'),
-	description: z.string().max(100, 'Description must be less than 100 characters').optional(),
-	status: TicketStatusEnum
-})
+import TicketFormSchema from '@/lib/schemas/ticket'
 
 export default function AddTicketRow() {
 	const { currentProject, setCurrentProject } = useProjectContext();
@@ -37,7 +31,7 @@ export default function AddTicketRow() {
 		if (!values.author || !values.title) {
 			return;
 		}
-
+		values.description = values.description ?? '';
 		const result = await createTicket(values, currentProject?.id);
 		if (!result) {
 			console.log('error');
@@ -127,7 +121,7 @@ export default function AddTicketRow() {
 						)}
 					/>
 					<div className="w-2/12 p-2">
-					<Button className='w-full'>Add ticket</Button>
+						<Button className='w-full'>Add ticket</Button>
 					</div>
 				</form>
 			</Form>

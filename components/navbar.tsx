@@ -7,7 +7,7 @@ import { useProjectContext } from '@/context/project-context'
 import { Button } from './ui/button'
 import { ChartNoAxesColumn } from 'lucide-react'
 
-const Navbar = () => {
+export default function Navbar() {
 	const { setCurrentProject } = useProjectContext();
 
 	return (
@@ -22,12 +22,8 @@ const Navbar = () => {
 					<Button variant="outline" size="icon" onClick={() => setCurrentProject(null)}>
 						<ChartNoAxesColumn className='scale-100' />
 					</Button>
-
 				</div>
 			</div>
-
 		</nav>
 	)
 }
-
-export default Navbar
