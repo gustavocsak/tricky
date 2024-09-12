@@ -10,7 +10,7 @@ export default function ProjectView() {
 	const { currentProject } = useProjectContext();
 
 	return (
-		<div className="py-4 ps-4 w-full flex flex-col gap-4 justify-between">
+		<div className="py-4 px-4 w-full flex flex-col gap-4 justify-between">
 			{currentProject ? (
 				<>
 					<article>

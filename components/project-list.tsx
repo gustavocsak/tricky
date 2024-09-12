@@ -8,7 +8,7 @@ interface ProjectListProps {
 }
 
 export default function ProjectList({ data }: ProjectListProps) {
-    const { setProjects } = useProjectContext();
+    const { setProjects, projects } = useProjectContext();
 
     /* To be used in project-view */
     setProjects(data);
