@@ -2,7 +2,7 @@ export interface Project {
     id: string,
     title: string,
     author: string,
-    tickets: [],
+    tickets: Ticket[],
     createdAt: string
 }
 
