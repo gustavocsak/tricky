@@ -8,16 +8,28 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { useEffect, useState } from "react"
-import { Status, Ticket } from "@/lib/types"
+import { Project, Status, Ticket } from "@/lib/types"
 import { Badge } from "../ui/badge"
+
+interface LatestTicket extends Ticket {
+  project?: Project
+  projectTitle: string
+}
 
 export default function LatestTickets() {
 
-  const [tickets, setTickets] = useState<Ticket[]>([]);
+  const [latestTickets, setLatestTickets] = useState<LatestTicket[]>([]);
+
   useEffect(() => {
     async function fetchTickets() {
       const latestTickets = await getLatestTickets();
-      setTickets(latestTickets.slice(0, 3));
+      setLatestTickets(latestTickets.map((item: LatestTicket) => {
+        const { project, ...ticket } = item;
+        return {
+          ...ticket,
+          projectTitle: project?.title
+        }
+      }).slice(0,3));
     }
     fetchTickets();
   }, []);
@@ -29,23 +41,22 @@ export default function LatestTickets() {
         <CardDescription>Here are your three latest added tickets</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
-        {tickets.map(ticket => {
-          return <TicketCard title={ticket.title} createdAt={ticket.createdAt} status={ticket.status} />
+        {latestTickets.map(item => {
+          return <TicketCard title={item.title} createdAt={item.createdAt} status={item.status} project={item.projectTitle} />
         })}
       </CardContent>
     </Card>
   )
 }
 
-interface TicketProps {
+interface TicketCardProps {
   title: string,
   createdAt: string,
-  status: Status
+  status: Status,
+  project: string
 }
 
-
-
-function TicketCard({ title, createdAt, status }: TicketProps) {
+function TicketCard({ title, createdAt, status, project }: TicketCardProps) {
   const mapStatus = (status: Status) => {
     switch(status) {
         case Status.OPEN:
@@ -62,9 +73,10 @@ function TicketCard({ title, createdAt, status }: TicketProps) {
   const variant = mapStatus(status);
   return (
     <div className="flex flex-row justify-around rounded-md border p-2">
-      <div className="text-center text-sm w-4/12">{title}</div>
-      <div className="text-center text-sm w-4/12">{createdAt.slice(0,10)}</div>
-      <div className="text-center text-sm w-4/12"><Badge variant={variant}>{statusDisplay}</Badge></div>
+      <div className="text-center text-sm w-3/12">{title}</div>
+      <div className="text-center text-sm w-3/12">{createdAt.slice(0,10)}</div>
+      <div className="text-center text-sm w-3/12">{project}</div>
+      <div className="text-center text-sm w-3/12"><Badge variant={variant}>{statusDisplay}</Badge></div>
     </div>
 
   )

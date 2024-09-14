@@ -34,6 +34,9 @@ export async function GET(request: Request, context: any) {
         const tickets = await prisma.ticket.findMany({
             orderBy: {
                 createdAt: 'desc'
+            },
+            include: {
+                project: true
             }
         });
         return Response.json(tickets);
