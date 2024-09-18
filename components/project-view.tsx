@@ -25,7 +25,6 @@ export default function ProjectView() {
 					</article>
 				</>
 			): (
-				// TODO: improve the no-project selected screen
 				<Stats />
 			)}
 		</div>

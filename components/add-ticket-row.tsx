@@ -24,7 +24,7 @@ import { useProjectContext } from '@/context/project-context'
 import TicketFormSchema from '@/lib/schemas/ticket'
 
 export default function AddTicketRow() {
-	const { currentProject, setCurrentProject } = useProjectContext();
+	const { currentProject } = useProjectContext();
 
 	async function onSubmit(values: z.infer<typeof TicketFormSchema>) {
 		console.log(values)
@@ -54,7 +54,6 @@ export default function AddTicketRow() {
 		<div className='border-2 border-primary rounded w-full mt-2'>
 			<Form {...form}>
 				<form className='flex flex-row w-full items-center' onSubmit={form.handleSubmit(onSubmit)}>
-
 					<FormField
 						control={form.control}
 						name="title"
@@ -63,7 +62,6 @@ export default function AddTicketRow() {
 								<FormControl>
 									<Input placeholder="Your ticket title" {...field} />
 								</FormControl>
-
 								<FormMessage />
 							</FormItem>
 						)}
