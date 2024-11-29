@@ -5,6 +5,14 @@ import "./globals.css";
 import Navbar from "@/components/navbar";
 import ProjectContextProvider from "@/context/project-context";
 
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -17,17 +25,25 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  console.log('RootLayout render')
+  console.log("RootLayout render");
   return (
-    <html lang="en" style={{ height: "100%" }}>
-      <body className={`${inter.className} h-full bg-background`}>
-        <ThemeProvider>
-          <ProjectContextProvider>
-            <Navbar />
-            {children}
+    <ClerkProvider
+      appearance={{
+        variables: {
+          colorPrimary: "hsl(263.4, 70%, 50.4%)",
+        },
+      }}
+    >
+      <html lang="en" style={{ height: "100%" }}>
+        <body className={`${inter.className} h-full bg-background`}>
+          <ThemeProvider>
+            <ProjectContextProvider>
+              <Navbar />
+              {children}
             </ProjectContextProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

@@ -12,6 +12,7 @@ datasource db {
 
 model Project {
   id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String
   title String
   author String
   createdAt DateTime @updatedAt
